@@ -7,6 +7,7 @@
 ### Improvements and bug fixes
 
 - sec: set tokens to private schema (#4968 -@brianmay)
+- build(deps): use elixir 1.18.4, node 22 & debian trixie (#4889 - @swiffer)
 
 #### Build, CI, internal
 
@@ -24,6 +25,7 @@
 
 - docs: for new installs, pin postgres container to debian trixie to avoid collation version mismatch (#4901 - @swiffer)
 - docs: Update FreeBSD and Debian instructions to use GRAFANA_API_TOKEN for the dashboard writes (#4942 - @uqs)
+- docs: rename Home Assistant object_id to default_entity_id to be compliant with latest HA (#4980 - @MrPaulAR)
 
 ## [2.1.1] - 2025-08-16
 
