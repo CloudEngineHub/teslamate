@@ -12,6 +12,7 @@
 - build(deps): use elixir 1.18.4, node 22 & debian trixie (#4889 - @swiffer)
 - fix: allow using different PostgreSQL port than default when using socket_dir connection (#4979 - @jaypark0006)
 - perf: use anti join for short-circuit evaluation when getting non streamed drives (#4990 - @swiffer)
+- feat: Add ulimit cap to prevent memory bloat in some misconfigured versions of Docker/containerd Hosts (e.g. on Debian 13) (#5025 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -24,6 +25,9 @@
 - build(deps): bump crate-ci/typos from 1.34.0 to 1.37.0 (#4976)
 - build(deps): bump finch from 0.19.0 to 0.20.0 (#4929)
 - build(deps): update flake.lock (#4991)
+- build(deps): update flake.lock (#4997)
+- build(deps): bump actions/stale from 9.1.0 to 10.1.0 (#5019)
+- build(deps): bump @docusaurus/core from 3.9.1 to 3.9.2, @docusaurus/preset-classic from 3.9.1 to 3.9.2 and dependencies in /website (#5020)
 
 #### Dashboards
 
@@ -48,6 +52,8 @@
 - docs: explain MQTT in Readme via link to Wikipedia (#4985 - @DanCard)
 - docs(dev): provide guidelines for checking dependency updates before merging (#4969 - @JakobLichterfeld)
 - docs: add domain prefix to Home Assistant default_entity_id (#5014 - @gym22)
+- docs: add star history (#5024 - @JakobLichterfeld)
+- docs: bump Traefik to v3.5 and enable http3 in advanced guide (#5023 - @swiffer)
 
 ## [2.1.1] - 2025-08-16
 
