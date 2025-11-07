@@ -4,6 +4,27 @@
 
 ### New features
 
+### Improvements and bug fixes
+
+#### Build, CI, internal
+
+#### Dashboards
+
+#### Translations
+
+#### Documentation
+
+## [2.2.0] - 2025-11-06
+
+As always, there have been many improvements. We now support a proxy for the OpenStreetMap API. If you live in a geo-blocked location, this could simplify your setup. Your tokens are now more secure.
+We use the latest dependencies and support PostgreSQL 18 (To update, back up your data and follow [the guide](https://docs.teslamate.org/docs/maintenance/upgrading_postgres) **Please note: Volume mounts have changed in PostgreSQL18, see point 4 of the guide.**).
+We also avoid memory bloat on misconfigured Docker hosts. If your host has limited hardware, this will greatly improve your experience.
+The dashboards have been improved in terms of performance, and all dashboards now function as expected when set to miles.
+
+Enjoy it.
+
+### New features
+
 - feat: support proxy for openstreet API (#4970 - @jaypark0006)
 
 ### Improvements and bug fixes
@@ -13,6 +34,7 @@
 - fix: allow using different PostgreSQL port than default when using socket_dir connection (#4979 - @jaypark0006)
 - perf: use anti join for short-circuit evaluation when getting non streamed drives (#4990 - @swiffer)
 - feat: Add ulimit cap to prevent memory bloat in some misconfigured versions of Docker/containerd Hosts (e.g. on Debian 13) (#5025 - @JakobLichterfeld)
+- feat: officially support PostgreSQL 18 (#4890 - @swiffer)
 
 #### Build, CI, internal
 
@@ -54,6 +76,7 @@
 - docs: add domain prefix to Home Assistant default_entity_id (#5014 - @gym22)
 - docs: add star history (#5024 - @JakobLichterfeld)
 - docs: bump Traefik to v3.5 and enable http3 in advanced guide (#5023 - @swiffer)
+- docs: add docs for volume mount change with PostgreSQL 18 (#4890 - @swiffer)
 
 ## [2.1.1] - 2025-08-16
 
@@ -2608,7 +2631,8 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v2.1.1...HEAD
+[unreleased]: https://github.com/teslamate-org/teslamate/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/teslamate-org/teslamate/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/teslamate-org/teslamate/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/teslamate-org/teslamate/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/teslamate-org/teslamate/compare/v1.33.0...v2.0.0
