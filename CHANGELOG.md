@@ -4,13 +4,15 @@
 
 ### New features
 
-feat: add optional dark mode feature (#5065 - @wooter)
+- feat: add optional dark mode feature (#5065 - @wooter)
 
 ### Improvements and bug fixes
 
 - feat: use Logger instead of IO.puts in DB check (#5050 - @swiffer)
 - feat: Increase max_header_value_length to support oauth2-proxy (#5031 - @ultravail)
 - perf: Replace positions indexes from BTREE to BRIN to reduce memory usage (#5075 - @ilya-y-synth)
+- feat(grafana): disable update checks as version is handled via docker image (#5115 - @fatbasstard)
+- perf: use static asset compression via brotli and zstandard to enhance HTTP Compression (#5113 - @swiffer)
 
 #### Build, CI, internal
 
@@ -28,6 +30,15 @@ feat: add optional dark mode feature (#5065 - @wooter)
 - build(deps): bump crate-ci/typos from 1.40.0 to 1.41.0 (#5079)
 - build(deps): bump actions/stale from 10.1.0 to 10.1.1 (#5080)
 - build(deps): bump lodash from 4.17.21 to 4.17.23 in /website (#5109)
+- build(deps): bump lodash and @geoman-io/leaflet-geoman-free in /assets (#5126)
+- build(deps): bump react and react-dom from 19.2.3 to 19.2.4 in /website (#5124)
+- build(deps): bump crate-ci/typos from 1.41.0 to 1.42.3 (#5123)
+- build(deps): bump docker/login-action from 3.6.0 to 3.7.0 (#5119)
+- build(deps): bump nix-community/cache-nix-action from 7.0.0 to 7.0.2 (#5122)
+- build(deps): bump actions/cache from 5.0.1 to 5.0.3 (#5120)
+- build(deps): bump tesla from 1.14.1 to 1.14.2 (#4780)
+- fix(nix): update mix dependency hash in nix builds (#4780 - @JakobLichterfeld)
+- feat(middleware): migrate Tesla HTTP client to v2 Macro to avoid use of soft deprecated configuration (#4780 - @JakobLichterfeld and @brianmay)
 
 #### Dashboards
 
