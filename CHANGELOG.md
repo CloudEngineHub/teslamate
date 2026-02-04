@@ -2,6 +2,14 @@
 
 ## [unreleased]
 
+Let's start with a quote: "Why do programmers like dark mode? Because light attracts bugs.". Yes, you read that right. TeslaMate Webview now has a dark mode.
+
+As always, lots of improvements have been made. Memory usage has been reduced, while performance has been increased — it sounds too good to be true, but it's the reality.
+Battery heating is now also shown on the overview dashboard, and the drives dashboard now always shows the consumption.
+To make your TeslaMate experience even better, we have also made more than 28 other improvements.
+
+Enjoy!
+
 ### New features
 
 - feat: add optional dark mode feature (#5065 - @wooter)
@@ -36,9 +44,6 @@
 - build(deps): bump docker/login-action from 3.6.0 to 3.7.0 (#5119)
 - build(deps): bump nix-community/cache-nix-action from 7.0.0 to 7.0.2 (#5122)
 - build(deps): bump actions/cache from 5.0.1 to 5.0.3 (#5120)
-- build(deps): bump tesla from 1.14.1 to 1.14.2 (#4780)
-- fix(nix): update mix dependency hash in nix builds (#4780 - @JakobLichterfeld)
-- feat(middleware): migrate Tesla HTTP client to v2 Macro to avoid use of soft deprecated configuration (#4780 - @JakobLichterfeld and @brianmay)
 
 #### Dashboards
 
