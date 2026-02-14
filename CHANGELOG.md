@@ -6,13 +6,27 @@ Let's start with a quote: "Why do programmers like dark mode? Because light attr
 
 As always, lots of improvements have been made. Memory usage has been reduced, while performance has been increased — it sounds too good to be true, but it's the reality.
 Battery heating is now also shown on the overview dashboard, and the drives dashboard now always shows the consumption.
-To make your TeslaMate experience even better, we have also made more than 37 other improvements.
+To make your TeslaMate experience even better, we have also made more than 40 other improvements.
 
 Enjoy!
+
+### 📄 License Change Notice
+
+As of PR #5131, TeslaMate has transitioned from the MIT License to the GNU Affero General Public License v3.0 (AGPLv3).
+
+What does this mean for you?
+
+- For Private Users: Nothing changes. You can continue to use, host, and modify TeslaMate for your personal use for free, just as before.
+- For the Community: This change ensures that TeslaMate remains open and free. It prevents companies from taking the community's hard work and turning it into a closed-source commercial service without giving back.
+- For Developers: If you modify or use TeslaMate, you must now share your source code modifications under the same license.
+
+We believe this step is necessary to protect the project from exploitation and to ensure its long-term sustainability.
 
 ### New features
 
 - feat: add optional dark mode feature (#5065 - @wooter)
+- legal: relicense under AGPLv3 (#5131 - @JakobLichterfeld)
+- legal: add Trademark notice (#5131 - @JakobLichterfeld)
 
 ### Improvements and bug fixes
 
@@ -51,6 +65,9 @@ Enjoy!
 - chore: reorganize CLI definition to avoid elixir 1.19 warning (#5062 - @JakobLichterfeld)
 - build: update db_connection to version 2.9.0 (#5062 - @JakobLichterfeld)
 - build: use Elixir 1.19.5 OTP 26 (#5130 - @swiffer, @brianmay and @JakobLichterfeld)
+- build(deps): bump qs from 6.14.1 to 6.14.2 in /website (#5140)
+- build(deps): update & bump mix deps (#5139 - @swiffer)
+- build(deps): bump ex_cldr from 2.42.0 to 2.46.0 (#5053 - @JakobLichterfeld)
 
 #### Dashboards
 
