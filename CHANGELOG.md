@@ -2,11 +2,25 @@
 
 ## [unreleased]
 
+### New features
+
+### Improvements and bug fixes
+
+#### Build, CI, internal
+
+#### Dashboards
+
+#### Translations
+
+#### Documentation
+
+## [3.0.0] - 2026-02-28
+
 Let's start with a quote: "Why do programmers like dark mode? Because light attracts bugs.". Yes, you read that right. TeslaMate Webview now has a dark mode.
 
 As always, lots of improvements have been made. Memory usage has been reduced, while performance has been increased — it sounds too good to be true, but it's the reality.
 Battery heating is now also shown on the overview dashboard, and the drives dashboard now always shows the consumption.
-To make your TeslaMate experience even better, we have also made more than 45 other improvements.
+To make your TeslaMate experience even better, we have also made more than 52 other improvements.
 
 Enjoy!
 
@@ -36,6 +50,8 @@ We believe this step is necessary to protect the project from exploitation and t
 - perf: Replace positions indexes from BTREE to BRIN to reduce memory usage (#5075 - @ilya-y-synth)
 - feat(grafana): disable update checks as version is handled via docker image (#5115 - @fatbasstard)
 - perf: use static asset compression via brotli and zstandard to enhance HTTP Compression (#5113 - @swiffer)
+- feat: use Grafana 12.4.0 (#4965 - @swiffer)
+- fix(vehicle): update state transition to handle offline scenario after a drive end with no network (#5152 - @jlestel)
 
 #### Build, CI, internal
 
@@ -74,6 +90,10 @@ We believe this step is necessary to protect the project from exploitation and t
 - build(deps): update flake.lock (#5141)
 - build(deps): relax requirement for elixir to allow 1.17+ and clarify what is supported (#5145 - @swiffer)
 - build(deps): update flake.lock (#5148)
+- build(deps): update flake.lock (#5154)
+- build(deps): bump ajv in /website (#5149)
+- chore(website): bump mimimatch to version 3.1.5 to solve CVE-2026-26996, CVE-2026-27903 and CVE-2026-27904 (#5155 - @JakobLichterfeld)
+- chore(website): bump serialize-javascript to version 7.0.3 to solve CWE-96 (#5156 - @JakobLichterfeld)
 
 #### Dashboards
 
@@ -89,6 +109,7 @@ We believe this step is necessary to protect the project from exploitation and t
 - docs: fix external image rendering with Traefik SSL (#5074 - @swiffer)
 - docs(home_assistant): default tesla_active_route_distance_to_arrival sensor to kilometers (#5086 - @kenni)
 - docs: Remove hints to now deprecated Grafana VS Code Extension in contribution guide (#5110 - @swiffer)
+- docs: Add reference to TeslaMate Achievements (#5134 - @crstian19)
 
 ## [2.2.0] - 2025-11-06
 
@@ -2706,7 +2727,8 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v2.2.0...HEAD
+[unreleased]: https://github.com/teslamate-org/teslamate/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/teslamate-org/teslamate/compare/v2.2.0...v3.0.0
 [2.2.0]: https://github.com/teslamate-org/teslamate/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/teslamate-org/teslamate/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/teslamate-org/teslamate/compare/v2.0.0...v2.1.0
