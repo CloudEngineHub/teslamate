@@ -8,6 +8,8 @@
 
 #### Build, CI, internal
 
+- build(deps): bump ex_cldr from 2.46.0 to 2.47.1 to fix 100% CPU lock when accessing TeslaMate web (#5166)
+
 #### Dashboards
 
 #### Translations
@@ -35,6 +37,14 @@ What does this mean for you?
 - For Developers: If you modify or use TeslaMate, you must now share your source code modifications under the same license.
 
 We believe this step is necessary to protect the project from exploitation and to ensure its long-term sustainability.
+
+### Known issues
+
+We have received reports from users suffering with "No Data" errors when viewing dashboards in Grafana (#5157).
+These issues are currently assumed to be instance specific, caused by changes in Grafana (v12.1.1 -> v12.4.0) and need to be addressed by following the steps below once.
+
+- If you are affected please try saving the TeslaMate datasource by clicking on "Save & test" in Grafana -> Connections -> Data sources -> TeslaMate.
+- If some dashboard keep showing errors please try resetting the Geofence filter by selecting "All" from the dropdown.
 
 ### New features
 
