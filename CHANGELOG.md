@@ -7,15 +7,30 @@
 ### Improvements and bug fixes
 
 - feat(webview): Sort vehicles by display_priority (#5188 - @olsoybakk and @swiffer)
-- fix(grafana): use FLOOR/CEIL over ROUND for timestamps used in dashboard links to avoid timeranges becoming to narrow (#5187 - @swiffer)
+- feat(webview): Make icons inherit text color for better contrast in dark mode (#5193 - @olsoybakk)
 
 #### Build, CI, internal
 
 - build(deps): bump ex_cldr from 2.46.0 to 2.47.1 to fix 100% CPU lock when accessing TeslaMate web (#5166)
+- ci: migrate runners for arm from buildjet to gha native (#5206 - @adriankumpf)
+- ci: limit DevOps workflow runs of type push to branch main to prevent duplicate runs on PR (#5211 - @swiffer)
+- build(deps): update flake.lock (#5186)
+- fix(nix): update mix dependency hash in nix builds (#5186 - @JakobLichterfeld)
+- build(deps): bump actions/stale from 10.1.1 to 10.2.0 (#5162)
+- build(deps): bump crate-ci/typos from 1.42.3 to 1.44.0 (#5163)
+- build(deps): bump finch from 0.20.0 to 0.21.0 (#5165)
+- build(deps): bump immutable from 5.1.4 to 5.1.5 in /assets (#5176)
+- build(deps): bump svgo from 3.3.2 to 3.3.3 in /website (#5177)
 
 #### Dashboards
 
+- fix: use FLOOR/CEIL over ROUND for timestamps used in dashboard links to avoid timeranges becoming to narrow (#5187 - @swiffer)
+- fix: ensure Charges / Drives dashboards load correctly if no Geofence exists (#5199 - @swiffer)
+- fix: division by zero in SQL query for cost_mileage in Trips dashboard (#5198 - @DrMichael)
+
 #### Translations
+
+- i18n: updated Catalan default.po (#5180 - @pellix)
 
 #### Documentation
 
