@@ -74,6 +74,13 @@
 - feat(nix): update NixOS version to 26.05 (#5350 - @JakobLichterfeld)
 - fix(nix): correct URL format for PostgreSQL connection in Grafana 13+ (#5351 - @JakobLichterfeld)
 - fix(nix): make grafana.secretKeyFile optional with old insecure grafana default fallback (#5352 - @JakobLichterfeld)
+- build(deps): bump ex_cldr from 2.47.2 to 2.47.4 (#5361)
+- ci(deps): bump the actions-deps group across 4 directories with 11 updates (#5368)
+- build(deps): update flake.lock (#5354)
+- build(deps): bump finch from 0.21.0 to 0.22.0 (#5358)
+- build(deps): bump react and react-dom from 19.2.5 to 19.2.6 in /website (#5366)
+- build(deps-dev): bump sass from 1.99.0 to 1.100.0 in /assets (#5360)
+- build(deps): bump @docusaurus/core, /faster and /preset-classic from 3.10.0 to 3.10.1 in /website (#5365)
 
 #### Dashboards
 
@@ -93,6 +100,7 @@
 #### Documentation
 
 - docs: drop private schema before restore (#5190 - @brianmay)
+- docs: remove references to mcu2-upgraded-cars branch (#5371- @brianmay)
 
 ## [3.0.0] - 2026-02-28
 
