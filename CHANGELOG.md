@@ -4,6 +4,31 @@
 
 ### New features
 
+### Improvements and bug fixes
+
+#### Build, CI, internal
+
+#### Dashboards
+
+#### Translations
+
+#### Documentation
+
+## [3.1.0] - 2026-06-07
+
+MCU2 upgraded cars are now fully supported in the main release (please switch from the now deprecated mcu2 branch aka pr-4453).
+
+As always, there have been many improvements. We now use the latest version of Grafana (13.0.1+security-01). The dashboards have been improved in terms of performance, and all dashboards now function as expected even if no geofence exists. BRIN indexes are now maintained to prevent performance degradation over time.
+To make your TeslaMate experience even better, we have also made more than 80 other improvements.
+
+Enjoy!
+
+### ARMv7 deprecation
+
+This is the last TeslaMate release to include ARMv7 Docker images. To keep up with current Elixir versions, ARMv7 support will be dropped going forward. Please migrate your OS to ARM64 or AMD64 before upgrading to the next release. If this is not possible, please inform us in #5304.
+
+### New features
+
 - feat: handle sleep behavior of MCU2 upgraded cars (#4453 -> [f58df80](https://github.com/teslamate-org/teslamate/commit/f58df8088c3b935851e84e2f935a041fc393b3ff) - @micves, @JakobLichterfeld and @brianmay)
 
 ### Improvements and bug fixes
@@ -91,6 +116,7 @@
 - feat: enable timepicker in efficiency dashboard (#5257 - @swiffer)
 - fix: ensure low precision mode is used for consumption gross for larger intervals (#5257 - @swiffer)
 - feat: improve filters in Statistics dashboard (#5340 - @DrMichael)
+- feat: add geofence filter to Charging Stats dashboard with default to all (#5355 - @faekz0r)
 
 #### Translations
 
@@ -101,6 +127,7 @@
 
 - docs: drop private schema before restore (#5190 - @brianmay)
 - docs: remove references to mcu2-upgraded-cars branch (#5371- @brianmay)
+- docs: update DROP SCHEMA commands to include IF EXISTS to avoid issues with old installations (@5372- @JakobLichterfeld)
 
 ## [3.0.0] - 2026-02-28
 
@@ -2822,7 +2849,8 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v3.0.0...HEAD
+[unreleased]: https://github.com/teslamate-org/teslamate/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/teslamate-org/teslamate/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/teslamate-org/teslamate/compare/v2.2.0...v3.0.0
 [2.2.0]: https://github.com/teslamate-org/teslamate/compare/v2.1.1...v2.2.0
 [2.1.1]: https://github.com/teslamate-org/teslamate/compare/v2.1.0...v2.1.1
