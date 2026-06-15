@@ -14,6 +14,37 @@
 
 #### Documentation
 
+## [4.0.1] - 2026-06-14
+
+This release resolves the issue with refresh tokens. This was a community effort: the community conducted research, submitted pull requests, and the maintainers provided test images. We love to see, and we hope, we do not need another quick hotfix in the next days, weeks, ... .
+To make your TeslaMate experience even better, we have also made more than 8 other improvements.
+
+Enjoy!
+
+### New features
+
+### Improvements and bug fixes
+
+- fix: enable HTTP/2 and set TLS to 1.3 for TESLA_AUTH_HOST (#5406 - @kenc420 and @longzheng)
+- feat: log Erlang and OTP version (#5397 - @swiffer)
+
+#### Build, CI, internal
+
+- ci: remove now obsolete ARMv7 buildcache (#5397 - @swiffer)
+- build: remove now unused zstd compression tool to reduce docker image size (#5397 - @swiffer)
+- build(deps): bump floki from 0.38.1 to 0.38.3 (#5359)
+- ci(osv-scanner): don't fail on main pushes and merge queue (#5410 - @JakobLichterfeld)
+
+#### Dashboards
+
+#### Translations
+
+#### Documentation
+
+- docs: clarify Grafana and Erlang requirements (#5397 - @swiffer)
+- docs: clarify which docker images are provided and what to do if the user have a Raspberry Pi with ARMv7 OS (#5397 - @swiffer)
+- docs: clarify Erlang and OTP support in contributing guide (#5397 - @swiffer)
+
 ## [4.0.0] - 2026-06-13
 
 **This is a breaking change release:**
@@ -2878,7 +2909,8 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v4.0.0...HEAD
+[unreleased]: https://github.com/teslamate-org/teslamate/compare/v4.0.1...HEAD
+[4.0.1]: https://github.com/teslamate-org/teslamate/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/teslamate-org/teslamate/compare/v3.1.0...v4.0.0
 [3.1.0]: https://github.com/teslamate-org/teslamate/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/teslamate-org/teslamate/compare/v2.2.0...v3.0.0
