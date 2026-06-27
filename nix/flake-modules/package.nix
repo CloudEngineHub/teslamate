@@ -9,6 +9,7 @@
     let
       beamPackages = pkgs.beam.packagesWith pkgs.beam.interpreters.erlang_28;
       elixir = beamPackages.elixir_1_19;
+      rebar3 = beamPackages.rebar3;
 
       src = ../..;
       version = builtins.readFile "${src}/VERSION";
@@ -26,7 +27,7 @@
       nodePackages = pkgs.buildNpmPackage {
         name = "${pname}-assets";
         src = "${src}/assets";
-        npmDepsHash = "sha256-3K7F4JFEka7IC+1CE1ih98U47XLhgVXBJB4xlu37rxw="; # if you change the npm deps, you need to update this hash
+        npmDepsHash = "sha256-CD0IaoMxaBcoAHMJusIn0e0mDo962wLKp6lWjFIb/gI="; # if you change the npm deps, you need to update this hash
         # npmDepsHash = pkgs.lib.fakeHash;
         dontNpmBuild = true;
         inherit nodejs;
@@ -96,11 +97,15 @@
           type = lib.types.package;
           readOnly = true;
         };
+        teslamate.rebar3 = lib.mkOption {
+          type = lib.types.package;
+          readOnly = true;
+        };
       };
 
       config = {
         teslamate = {
-          inherit cldr elixir;
+          inherit cldr elixir rebar3;
         };
 
         packages = {

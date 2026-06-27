@@ -6,9 +6,19 @@
 
 ### Improvements and bug fixes
 
+- fix(webview): show charging finish time in browser local time (#5436 - @Ashok28)
+
 #### Build, CI, internal
 
 - build(nix): update mixFodDeps hash in nix builds ([954e8739](https://github.com/teslamate-org/teslamate/commit/954e8739326e092f7cddf7308dd4b704cc008f62) - @JakobLichterfeld)
+- build(deps): bump launch-editor from 2.13.2 to 2.14.1 in /website (#5426)
+- build(deps): update flake.lock (#5427)
+- build(deps): bump webpack-dev-server from 5.2.4 to 5.2.5 in /website (#5445)
+- chore: add .codegraph to .gitignore (#5440- @JakobLichterfeld)
+- ci: speed up check_linting by running treefmt in a lean app (#5440- @JakobLichterfeld)
+- sec(deps): add ws override to version 8.21.0 in /website (#5446 - @JakobLichterfeld)
+- build(deps-dev): bump esbuild from 0.28.0 to 0.28.1 in /assets (#5444)
+- sec(deps): add joi override to version 17.13.4 in /website (#5448 - @JakobLichterfeld)
 
 #### Dashboards
 
