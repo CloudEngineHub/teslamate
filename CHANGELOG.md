@@ -4,9 +4,13 @@
 
 ### New features
 
+- feat: add service mode to webview and reduce log when car is Unlocked at service mode (#5289 - @NirKli)
+
 ### Improvements and bug fixes
 
 - fix(webview): show charging finish time in browser local time (#5436 - @Ashok28)
+- fix(vehicle): use streaming-aware interval when a drive starts (#5417 - @evanclan)
+- fix(mqtt): retry failed value publications (#5429 - @ciyahu)
 
 #### Build, CI, internal
 
@@ -29,6 +33,7 @@
 
 - docs: update security policy to emphasize network-level protection ([27172cba](https://github.com/teslamate-org/teslamate/commit/27172cba54782f9a8eb7fdd9ea3a481dfd9d8f2b) - @JakobLichterfeld)
 - docs: fix typo in DATABASE_SSL_SNI description (#5346 - @dashitongzhi)
+- docs: update upgrading instructions to emphasize backup before updating more clearly (#5453 - @JakobLichterfeld)
 
 ## [4.0.1] - 2026-06-14
 
