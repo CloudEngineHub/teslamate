@@ -12,6 +12,8 @@
 - fix(webview): show charging finish time in browser local time (#5436 - @Ashok28)
 - fix(vehicle): use streaming-aware interval when a drive starts (#5417 - @evanclan)
 - fix(mqtt): retry failed value publications (#5429 - @ciyahu)
+- fix: redact Tesla API tokens from logs (#5475 - @magrathean-uk)
+- fix(vehicle): back off for 15 minutes on Fleet API `EXCEEDED_LIMIT` responses instead of retrying every 10-30s (#5476 - @hossamnagy)
 
 #### Build, CI, internal
 
@@ -33,10 +35,13 @@
 - build(deps): bump plug_cowboy from 2.8.1 to 2.9.0 (#5463)
 - build(deps): bump floki from 0.38.3 to 0.38.4 (#5461)
 - test: harden async waits (#5456 - @magrathean-uk)
+- build(deps): update flake.lock (#5477)
 
 #### Dashboards
 
 #### Translations
+
+- i18n: add Hungarian translation (#5480 - @magrathean-uk)
 
 #### Documentation
 
@@ -44,6 +49,7 @@
 - docs: fix typo in DATABASE_SSL_SNI description (#5346 - @dashitongzhi)
 - docs: update upgrading instructions to emphasize backup before updating more clearly (#5453 - @JakobLichterfeld)
 - docs(mqtt): add service mode topic to MQTT integration documentation (#5472 - @JakobLichterfeld)
+- docs: update star history chart links to new format in README (#5482 - @JakobLichterfeld)
 
 ## [4.0.1] - 2026-06-14
 
