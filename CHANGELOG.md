@@ -14,6 +14,7 @@
 - fix(mqtt): retry failed value publications (#5429 - @ciyahu)
 - fix: redact Tesla API tokens from logs (#5475 - @magrathean-uk)
 - fix(vehicle): back off for 15 minutes on Fleet API `EXCEEDED_LIMIT` responses instead of retrying every 10-30s (#5476 - @hossamnagy)
+- refactor: send TOKEN as Bearer header via FleetAuth middleware (#5470 - @jlestel)
 
 #### Build, CI, internal
 
@@ -36,6 +37,8 @@
 - build(deps): bump floki from 0.38.3 to 0.38.4 (#5461)
 - test: harden async waits (#5456 - @magrathean-uk)
 - build(deps): update flake.lock (#5477)
+- ci: sign published images with SLSA provenance + SBOM attestations (#5380 - @oivindoh)
+- fix(ci): add artifact-metadata permission for workflows as it is essential for generating attestations (#5484 - @JakobLichterfeld)
 
 #### Dashboards
 
