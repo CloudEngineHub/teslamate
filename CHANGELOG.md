@@ -6,6 +6,7 @@
 
 - feat: add service mode to webview and reduce log when car is Unlocked at service mode (#5289 - @NirKli)
 - feat: add Sun roof and individual window status via MQTT (#5393 - @nebhale)
+- feat: show and color the software update icon through the update lifecycle (#5487 - @NirKli)
 
 ### Improvements and bug fixes
 
@@ -53,6 +54,7 @@
 - docs: update upgrading instructions to emphasize backup before updating more clearly (#5453 - @JakobLichterfeld)
 - docs(mqtt): add service mode topic to MQTT integration documentation (#5472 - @JakobLichterfeld)
 - docs: update star history chart links to new format in README (#5482 - @JakobLichterfeld)
+- docs: update star history links in README with to include the now needed sealed token (#5489 - @JakobLichterfeld)
 
 ## [4.0.1] - 2026-06-14
 
