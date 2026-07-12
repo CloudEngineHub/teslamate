@@ -10,6 +10,7 @@
 - feat: show and color the software update icon through the update lifecycle (#5487 - @NirKli)
 - feat(mqtt): add download_perc and install_perc for pending sw install (#5487 - @NirKli)
 - feat: link the software update icon to the notateslaapp release notes (#5490 - @NirKli)
+- feat: add fullscreen mode to vehicle summary map (#5495 - @hakong)
 
 ### Improvements and bug fixes
 
@@ -58,6 +59,7 @@
 - docs(mqtt): add service mode topic to MQTT integration documentation (#5472 - @JakobLichterfeld)
 - docs: update star history chart links to new format in README (#5482 - @JakobLichterfeld)
 - docs: update star history links in README with to include the now needed sealed token (#5489 - @JakobLichterfeld)
+- docs: link directly to restore section in upgrading PostgreSQL guide (#5501 - @JakobLichterfeld)
 
 ## [4.0.1] - 2026-06-14
 
