@@ -21,6 +21,9 @@
 - fix(vehicle): back off for 15 minutes on Fleet API `EXCEEDED_LIMIT` responses instead of retrying every 10-30s (#5476 - @hossamnagy)
 - refactor: send TOKEN as Bearer header via FleetAuth middleware (#5470 - @jlestel)
 - fix: honor DATABASE_USER/DATABASE_PASS with DATABASE_SOCKET_DIR (#5503 - @mvanhorn)
+- fix(import): accept fractional TeslaFi battery levels (#5513 - @magrathean-uk)
+- fix(cars): enforce non-null VINs (#5512 - @magrathean-uk)
+- fix(mqtt): return publish errors without crashing (#5514 - @magrathean-uk)
 
 #### Build, CI, internal
 
@@ -46,6 +49,7 @@
 - ci: sign published images with SLSA provenance + SBOM attestations (#5380 - @oivindoh)
 - fix(ci): add artifact-metadata permission for workflows as it is essential for generating attestations (#5484 - @JakobLichterfeld)
 - build(deps): update flake.lock (#5498)
+- test: reuse API snapshots across paired fetches (#5510 - @magrathean-uk)
 
 #### Dashboards
 
