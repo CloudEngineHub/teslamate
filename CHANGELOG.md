@@ -24,6 +24,7 @@
 - fix(import): accept fractional TeslaFi battery levels (#5513 - @magrathean-uk)
 - fix(cars): enforce non-null VINs (#5512 - @magrathean-uk)
 - fix(mqtt): return publish errors without crashing (#5514 - @magrathean-uk)
+- fix(geofences): increase cost precision (#5508 - @magrathean-uk)
 
 #### Build, CI, internal
 
@@ -50,12 +51,14 @@
 - fix(ci): add artifact-metadata permission for workflows as it is essential for generating attestations (#5484 - @JakobLichterfeld)
 - build(deps): update flake.lock (#5498)
 - test: reuse API snapshots across paired fetches (#5510 - @magrathean-uk)
+- build(deps): bump tesla from 1.14.1 to 1.20.0, migrate to Tesla.client/2 and update mix nix hash (#5468 - @JakobLichterfeld)
 
 #### Dashboards
 
 #### Translations
 
 - i18n: add Hungarian translation (#5480 - @magrathean-uk)
+- i18n: improve Traditional Chinese translations (#5527 - @occultsound)
 
 #### Documentation
 
@@ -67,6 +70,7 @@
 - docs: update star history links in README with to include the now needed sealed token (#5489 - @JakobLichterfeld)
 - docs: link directly to restore section in upgrading PostgreSQL guide (#5501 - @JakobLichterfeld)
 - docs: split the backup and restore guides into two separate guides and highlight that you should transfer your backup of the host (#5502 - @JakobLichterfeld)
+- - docs: point Tesla Auth users to fixed releases (#5509 - @magrathean-uk)
 
 ## [4.0.1] - 2026-06-14
 
