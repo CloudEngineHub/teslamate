@@ -36,6 +36,7 @@
 - fix(vehicle): update geofence while driving with streaming API (#5515 - @magrathean-uk)
 - fix(vehicle): identify base Model 3 from model year 2022 as RWD instead of SR+ (#5551 - @magrathean-uk)
 - fix(mqtt): avoid blocking startup on retained cleanup (#5549 - @magrathean-uk)
+- feat: use Grafana 13.1.1 (#5559 - @swiffer)
 
 #### Build, CI, internal
 
@@ -79,6 +80,7 @@
 
 - feat(grafana): make data health summary actionable (#5526 - @magrathean-uk)
 - fix(grafana): drop the Releases panel from the home dashboard to end the CORS proxy dependency (#5548 - @JakobLichterfeld)
+- fix(grafana): use local calendar for Statistics period end boundaries (#5562 - @wjsall)
 
 #### Translations
 
