@@ -37,6 +37,7 @@
 - fix(vehicle): identify base Model 3 from model year 2022 as RWD instead of SR+ (#5551 - @magrathean-uk)
 - fix(mqtt): avoid blocking startup on retained cleanup (#5549 - @magrathean-uk)
 - feat: use Grafana 13.1.1 (#5559 - @swiffer)
+- fix(performance): use existing indexes for last-inserted / latest complete position lookups (#5438 - @swiffer)
 
 #### Build, CI, internal
 
@@ -75,11 +76,18 @@
 - ci(treefmt): stop treefmt.toml from drifting out of sync with the flake (#5545 - @JakobLichterfeld)
 - style(nix): format Nix code with nixfmt instead of the archived nixpkgs-fmt (#5545 - @JakobLichterfeld)
 - build(deps): update flake.lock (#5544)
+- build(deps): bump phoenix_live_view from 0.20.17 to 1.2.8 and migrate accordingly (#5580 - @JakobLichterfeld)
+- build(deps): bump all @docusaurus from 3.10.1 to 3.10.2 in /website (#5571)
+- build(deps): bump react and react-dom from 19.2.7 to 19.2.8 in /website (#5574)
+- build(deps): bump postcss from 8.5.15 to 8.5.25 in /website (#5582)
+- build(deps): bump the actions-deps group across 4 directories with 11 updates (#5576)
 
 #### Dashboards
 
 - feat(grafana): make data health summary actionable (#5526 - @magrathean-uk)
 - fix(grafana): drop the Releases panel from the home dashboard to end the CORS proxy dependency (#5548 - @JakobLichterfeld)
+- fix(dashboards): filter latest-value position panels on complete rows so they use the partial index (#5438 - @swiffer)
+- fix(grafana): Battery Health latest SOC/kWh panels pick the newest UNION row and use `usable_battery_level` on charges (#5438 - @swiffer)
 - fix(grafana): use local calendar for Statistics period end boundaries (#5562 - @wjsall)
 
 #### Translations
