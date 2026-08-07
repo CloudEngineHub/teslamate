@@ -38,10 +38,10 @@
 - fix(mqtt): avoid blocking startup on retained cleanup (#5549 - @magrathean-uk)
 - feat: use Grafana 13.1.1 (#5559 - @swiffer)
 - fix(performance): use existing indexes for last-inserted / latest complete position lookups (#5438 - @swiffer)
+- fix(geocoder): resolve state for Australian territories (#3868 - mattew124)
 
 #### Build, CI, internal
 
-- test(grafana): guard latest-position dashboard queries against missing partial-index predicate (#5581 - @magrathean-uk)
 - build(nix): update mixFodDeps hash in nix builds ([954e8739](https://github.com/teslamate-org/teslamate/commit/954e8739326e092f7cddf7308dd4b704cc008f62) - @JakobLichterfeld)
 - build(deps): bump launch-editor from 2.13.2 to 2.14.1 in /website (#5426)
 - build(deps): update flake.lock (#5427)
@@ -82,6 +82,7 @@
 - build(deps): bump react and react-dom from 19.2.7 to 19.2.8 in /website (#5574)
 - build(deps): bump postcss from 8.5.15 to 8.5.25 in /website (#5582)
 - build(deps): bump the actions-deps group across 4 directories with 11 updates (#5576)
+- test(grafana): guard latest-position dashboard queries against missing partial-index predicate (#5581 - @magrathean-uk)
 
 #### Dashboards
 
