@@ -5,7 +5,7 @@ defmodule TeslaMate.MixProject do
     [
       app: :teslamate,
       version: version(),
-      elixir: "~> 1.17",
+      elixir: "~> 1.19",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -55,6 +55,7 @@ defmodule TeslaMate.MixProject do
       {:gettext, "~> 1.0", override: true},
       {:jason, "~> 1.4"},
       {:lazy_html, ">= 0.1.0", only: :test},
+      {:meck, "~> 1.2", only: :test, override: true},
       {:mock, "~> 0.3", only: :test},
       {:nimble_csv, "~> 1.3"},
       {:phoenix, "~> 1.7.0"},

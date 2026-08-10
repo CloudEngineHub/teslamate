@@ -39,6 +39,8 @@
 - feat: use Grafana 13.1.1 (#5559 - @swiffer)
 - fix(performance): use existing indexes for last-inserted / latest complete position lookups (#5438 - @swiffer)
 - fix(geocoder): resolve state for Australian territories (#3868 - mattew124)
+- refactor(vehicles): make the geofence name lookup in the charging log total (#5599 - @JakobLichterfeld)
+- feat: use Grafana 13.1.3 (#5587 - @swiffer)
 
 #### Build, CI, internal
 
@@ -83,6 +85,9 @@
 - build(deps): bump postcss from 8.5.15 to 8.5.25 in /website (#5582)
 - build(deps): bump the actions-deps group across 4 directories with 11 updates (#5576)
 - test(grafana): guard latest-position dashboard queries against missing partial-index predicate (#5581 - @magrathean-uk)
+- build: use Elixir 1.20.2 OTP 29 (#5579 - @swiffer)
+- ci: derive Elixir cache keys from the toolchain and MIX_ENV (#5595 - @JakobLichterfeld)
+- fix(test): override meck to 1.2 for OTP 29 compatibility (#5598 - @swiffer)
 
 #### Dashboards
 
