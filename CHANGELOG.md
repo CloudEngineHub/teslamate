@@ -88,6 +88,18 @@
 - build: use Elixir 1.20.2 OTP 29 (#5579 - @swiffer)
 - ci: derive Elixir cache keys from the toolchain and MIX_ENV (#5595 - @JakobLichterfeld)
 - fix(test): override meck to 1.2 for OTP 29 compatibility (#5598 - @swiffer)
+- build(nix): reduce the manually pinned hashes to one and automate it (#5593 - @JakobLichterfeld)
+- ci: let Dependabot pull requests refresh the Nix hashes (#5593 - @JakobLichterfeld)
+- ci: verify Nix hashes on all dependency pull requests (#5593 - @JakobLichterfeld)
+- ci: let maintainers run CI on pull requests touching .github (#5593 - @JakobLichterfeld)
+- build(deps): bump postgrex from 0.22.2 to 0.22.3 (#5570)
+- build(deps): bump js-yaml from 4.2.0 to 4.3.1 in /website (#5597)
+- build(deps): bump brace-expansion from 1.1.14 to 1.1.18 in /website (#5596)
+- build(deps): bump fast-uri from 3.1.4 to 3.1.5 in /website (#5589)
+- build(deps): bump phoenix from 1.7.24 to 1.8.9 and migrate accordingly (#5572 - @JakobLichterfeld)
+- build(deps): update flake.lock (#5560)
+- build(deps-dev): bump sass from 1.101.0 to 1.102.0 in /assets (#5566)
+- build(deps): bump leaflet-control-geocoder from 3.3.1 to 4.0.0 in /assets (#5565)
 
 #### Dashboards
 
@@ -112,7 +124,7 @@
 - docs: update star history links in README with to include the now needed sealed token (#5489 - @JakobLichterfeld)
 - docs: link directly to restore section in upgrading PostgreSQL guide (#5501 - @JakobLichterfeld)
 - docs: split the backup and restore guides into two separate guides and highlight that you should transfer your backup of the host (#5502 - @JakobLichterfeld)
-- - docs: point Tesla Auth users to fixed releases (#5509 - @magrathean-uk)
+- docs: point Tesla Auth users to fixed releases (#5509 - @magrathean-uk)
 
 ## [4.0.1] - 2026-06-14
 
