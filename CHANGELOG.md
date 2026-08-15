@@ -2,7 +2,38 @@
 
 ## [unreleased]
 
-Existing charging processes are recomputed once during the upgrade migration: previously empty or zero `charge_energy_used` values (short or mixed AC sessions) gain values, the first start after the upgrade can take a few minutes longer on databases with years of history and slow HW, and charge costs are deliberately not changed retroactively.
+### New features
+
+### Improvements and bug fixes
+
+#### Build, CI, internal
+
+#### Dashboards
+
+#### Translations
+
+#### Documentation
+
+## [4.1.1] - 2026-08-14
+
+Hotfix for 4.1.0, which crashes in a startup loop on installations with MQTT enabled and no `MQTT_NAMESPACE` set. Upgrading is recommended for all MQTT users.
+
+### Improvements and bug fixes
+
+- fix(mqtt): don't require the namespace option in VehicleSubscriber (#5611 - @JakobLichterfeld)
+
+## [4.1.0] - 2026-08-14 **YANKED**
+
+We've fixed small bugs that had been around for years, implemented several feature requests, integrated the latest version of Grafana, and completely overhauled numerous areas within TeslaMate. As we fixed the phase detection during AC charges, existing charging processes are recomputed once during the upgrade migration: previously empty or zero `charge_energy_used` values (short or mixed AC sessions) gain values.
+The first start after the upgrade can take a few minutes longer on databases with years of history and slow hardware; charge costs are deliberately not changed retroactively (#5592).
+
+And Home Assistant MQTT auto discovery landed (opt-in).
+
+**Note for manual Home Assistant configurations:** The documented manual [mqtt_sensors.yaml](https://docs.teslamate.org/docs/integrations/home_assistant#mqtt_sensorsyaml-mqtt-section-of-configurationyaml) now uses `state_class: total_increasing` for the `charge_energy_added` sensor (#5543). If you re-sync your manual YAML, Home Assistant will treat the per-charge resets as meter cycles, which changes the long-term statistics behavior (e.g. in the Energy dashboard).
+
+To make your TeslaMate experience even better, we have made 112 improvements.
+
+Enjoy!
 
 ### New features
 
@@ -14,6 +45,7 @@ Existing charging processes are recomputed once during the upgrade migration: pr
 - feat: link the software update icon to the notateslaapp release notes (#5490 - @NirKli)
 - feat: add fullscreen mode to vehicle summary map (#5495 - @hakong)
 - feat(web): expose VIN in car summary ( #5556 - @Helvio88, @magrathean-uk)
+- feat(mqtt): add opt-in Home Assistant MQTT discovery (#5543 - @brianmay, @JakobLichterfeld)
 
 ### Improvements and bug fixes
 
@@ -3028,7 +3060,9 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v4.0.1...HEAD
+[unreleased]: https://github.com/teslamate-org/teslamate/compare/v4.1.1...HEAD
+[4.1.1]: https://github.com/teslamate-org/teslamate/compare/v4.1.0...v4.1.1
+[4.1.0]: https://github.com/teslamate-org/teslamate/compare/v4.0.1...v4.1.0
 [4.0.1]: https://github.com/teslamate-org/teslamate/compare/v4.0.0...v4.0.1
 [4.0.0]: https://github.com/teslamate-org/teslamate/compare/v3.1.0...v4.0.0
 [3.1.0]: https://github.com/teslamate-org/teslamate/compare/v3.0.0...v3.1.0
