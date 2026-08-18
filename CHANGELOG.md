@@ -7,10 +7,15 @@
 ### Improvements and bug fixes
 
 - fix(vehicle): shorten the streaming suspend probe interval from 30 to 10 minutes (#5600 - @onevcat)
+- feat(mqtt): enrich Home Assistant device metadata and republish on change (#5616 - @nebhale)
+- fix(charging): prevent smallint overflow in energy calculation and recalc migration on battery-side DC readings (5617 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
 - build(deps): bump tzdata from 1.1.3 to 1.1.4 (#5614 - @mews-se)
+- ci: purge orphaned GHCR attestation referrers (#5622 - @swiffer)
+- test: stop the app in test_helper instead of relying on --no-start (#5615 - @swiffer)
+- build(deps): update flake.lock (#5613)
 
 #### Dashboards
 
