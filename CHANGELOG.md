@@ -2,6 +2,9 @@
 
 ## [unreleased]
 
+**Note for Home Assistant MQTT discovery users:** The opt-in [MQTT discovery](https://docs.teslamate.org/docs/integrations/home_assistant#mqtt-discovery-automatic-configuration) now uses Home Assistant's device-based format; existing entities migrate automatically (#5618, #5629, #5638).
+Breaking for automations on discovered entities: the Health sensor is inverted (ON = problem), enum states are humanized (`NoPower` → `No Power`), the update-available sensor became an `update` entity, and the active route distance reports miles instead of km. MQTT topics are unchanged.
+
 ### New features
 
 - feat(vehicle): identify Cybertruck and show it correctly across UI and MQTT (#5627 - @nebhale)
@@ -13,6 +16,8 @@
 - fix(charging): prevent smallint overflow in energy calculation and recalc migration on battery-side DC readings (5617 - @JakobLichterfeld)
 - feat(mqtt): migrate Home Assistant discovery to device-based configuration (#5618 - @nebhale)
 - feat(mqtt): add missing Home Assistant discovery entities (#5629 - @nebhale)
+- feat: point sign-in token help link to the new tokens docs page (#5642 - @JakobLichterfeld)
+- feat(mqtt): refine Home Assistant discovery entity metadata and semantic (#5638 - @nebhale)
 
 #### Build, CI, internal
 
@@ -23,9 +28,15 @@
 
 #### Dashboards
 
+- feat(grafana): show start SOC on incomplete charges from the first charge sample (#5644 - @swiffer)
+
 #### Translations
 
 #### Documentation
+
+- doc: improve token and upgrade documentation, restructure sidebar (#5628 - @brianmay)
+- doc: promote token security note to info admonition in docker/nixos install (#5628, #5642 - @JakobLichterfeld)
+- doc: restructure sidebar by user journey (#5642 - @JakobLichterfeld)
 
 ## [4.1.1] - 2026-08-14
 
