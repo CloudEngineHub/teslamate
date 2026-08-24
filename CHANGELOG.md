@@ -2,8 +2,28 @@
 
 ## [unreleased]
 
+### New features
+
+### Improvements and bug fixes
+
+#### Build, CI, internal
+
+#### Dashboards
+
+#### Translations
+
+#### Documentation
+
+## [4.2.0] - 2026-08-23
+
+With Fleet Telemetry streaming enabled, TeslaMate now checks every 10 minutes instead of every 30 whether the vehicle has fallen asleep, so sleep transitions show up in dashboards up to 20 minutes sooner — at no extra API cost and with no impact on the vehicle's ability to sleep. We also refined the Home Assistant MQTT discovery, fixed a startup crash of the charging recalculation on unusual DC charging data (two reports) and enhanced the documentation.
+
 **Note for Home Assistant MQTT discovery users:** The opt-in [MQTT discovery](https://docs.teslamate.org/docs/integrations/home_assistant#mqtt-discovery-automatic-configuration) now uses Home Assistant's device-based format; existing entities migrate automatically (#5618, #5629, #5638, #5643).
 Breaking for automations on discovered entities: the Health sensor is inverted (ON = problem), enum states are humanized (`NoPower` → `No Power`), the update-available sensor became an `update` entity, the active route distance reports miles instead of km, and the derived psi tire pressure sensors were removed (set the unit on the bar entities in Home Assistant instead). MQTT topics are unchanged.
+
+To make your TeslaMate experience even better, we have made 20 improvements.
+
+Enjoy!
 
 ### New features
 
@@ -27,6 +47,8 @@ Breaking for automations on discovered entities: the Health sensor is inverted (
 - test: stop the app in test_helper instead of relying on --no-start (#5615 - @swiffer)
 - build(deps): update flake.lock (#5613)
 - build(deps): update flake.lock (#5645)
+- ci(ghcr): allow manual dispatch to build images for .github PRs (#5646 - @JakobLichterfeld)
+- build(deps): replace `ex_cldr` / `ex_cldr_plugs` with `localize` and `localize_web` (ex_cldr support ends 2027-12-31). Drops compile-time locale download and the Nix `cldr` pin (#5630 - @swiffer, @JakobLichterfeld)
 
 #### Dashboards
 
@@ -3086,7 +3108,8 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v4.1.1...HEAD
+[unreleased]: https://github.com/teslamate-org/teslamate/compare/v4.2.0...HEAD
+[4.2.0]: https://github.com/teslamate-org/teslamate/compare/v4.1.1...v4.2.0
 [4.1.1]: https://github.com/teslamate-org/teslamate/compare/v4.1.0...v4.1.1
 [4.1.0]: https://github.com/teslamate-org/teslamate/compare/v4.0.1...v4.1.0
 [4.0.1]: https://github.com/teslamate-org/teslamate/compare/v4.0.0...v4.0.1
