@@ -10,7 +10,7 @@
         "req_not_unlocked": false,
         "suspend_after_idle_min": 100000,
         "suspend_min": 100000,
-        "use_streaming_api": false
+        "use_streaming_api": true
       }
     ],
     "cars": [
@@ -42,9 +42,9 @@
         "battery_heater": null,
         "battery_heater_no_power": null,
         "battery_heater_on": null,
-        "battery_level": 80,
+        "battery_level": 60,
         "car_id": "$car",
-        "date": "2024-01-01T00:00:20.000000",
+        "date": "2024-01-01T00:00:00.000000",
         "drive_id": null,
         "driver_temp_setting": null,
         "elevation": null,
@@ -68,24 +68,31 @@
         "tpms_pressure_fr": null,
         "tpms_pressure_rl": null,
         "tpms_pressure_rr": null,
-        "usable_battery_level": 79
+        "usable_battery_level": 59
       }
     ],
     "states": [
       {
         "car_id": "$car",
-        "end_date": null,
+        "end_date": "<volatile>",
         "id": "state_1",
-        "start_date": "2024-01-01T00:00:20.000000",
+        "start_date": "2024-01-01T00:00:00.000000",
         "state": "online"
+      },
+      {
+        "car_id": "$car",
+        "end_date": null,
+        "id": "state_2",
+        "start_date": "<volatile>",
+        "state": "offline"
       }
     ],
     "updates": [
       {
         "car_id": "$car",
-        "end_date": "2024-01-01T00:00:20.000000",
+        "end_date": "2024-01-01T00:00:00.000000",
         "id": "update_1",
-        "start_date": "2024-01-01T00:00:20.000000",
+        "start_date": "2024-01-01T00:00:00.000000",
         "version": "2026.20.1 abc123"
       }
     ]
@@ -178,7 +185,7 @@
     "teslamate/cars/$car/active_route_destination": ["nil"],
     "teslamate/cars/$car/active_route_latitude": ["nil"],
     "teslamate/cars/$car/active_route_longitude": ["nil"],
-    "teslamate/cars/$car/battery_level": ["80"],
+    "teslamate/cars/$car/battery_level": ["60"],
     "teslamate/cars/$car/charge_energy_added": [""],
     "teslamate/cars/$car/charger_actual_current": [""],
     "teslamate/cars/$car/charger_phases": [""],
@@ -213,12 +220,12 @@
     "teslamate/cars/$car/scheduled_charging_start_time": [""],
     "teslamate/cars/$car/sentry_mode": ["false"],
     "teslamate/cars/$car/shift_state": [""],
-    "teslamate/cars/$car/since": ["<volatile>"],
+    "teslamate/cars/$car/since": ["<volatile>", "<volatile>"],
     "teslamate/cars/$car/spoiler_type": ["None"],
-    "teslamate/cars/$car/state": ["unavailable", "online"],
+    "teslamate/cars/$car/state": ["online", "offline"],
     "teslamate/cars/$car/time_to_full_charge": [""],
-    "teslamate/cars/$car/trim_badging": ["", "74D"],
-    "teslamate/cars/$car/usable_battery_level": ["79"],
+    "teslamate/cars/$car/trim_badging": ["74D"],
+    "teslamate/cars/$car/usable_battery_level": ["59"],
     "teslamate/cars/$car/version": ["2026.20.1"],
     "teslamate/cars/$car/wheel_type": ["Pinwheel18"]
   }
