@@ -10,6 +10,8 @@ Under the hood, this release adds a self-verifying black-box characterization su
 
 - fix(vehicle): cancel an update with the logged update row instead of the API payload, which crashed the vehicle process and left the update open forever (#5664 - @JakobLichterfeld)
 - fix(web): remove stray brace from the direction arrow SVG path, which made Safari log a parse error on every position update (#5665 - @JakobLichterfeld)
+- refactor(vehicle): route the vehicle's view of time through a clock seam (#5688 - @JakobLichterfeld)
+- refactor(vehicle): date timestamp-less state rows through the clock seam (#5689 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -21,6 +23,9 @@ Under the hood, this release adds a self-verifying black-box characterization su
 - fix(test): give the error_event selftest a settled terminal cycle (#5670 - @JakobLichterfeld)
 - fix(test): move the offline-resume scenario off the 15-minute boundary (#5681 - @JakobLichterfeld)
 - test(characterization): enforce the two-call-terminal limit (#5683 - @JakobLichterfeld)
+- test(characterization): convert suspend_logging scenarios to characterization fixtures (#5687 - @JakobLichterfeld)
+- test(characterization): run replays on a scenario clock, retire timebase (#5690 - @JakobLichterfeld)
+- test(characterization): pin the stale-timestamp resume crash (#5691 - @JakobLichterfeld)
 
 #### Dashboards
 
