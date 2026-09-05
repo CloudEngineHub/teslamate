@@ -12,6 +12,7 @@ Under the hood, this release adds a self-verifying black-box characterization su
 - fix(web): remove stray brace from the direction arrow SVG path, which made Safari log a parse error on every position update (#5665 - @JakobLichterfeld)
 - refactor(vehicle): route the vehicle's view of time through a clock seam (#5688 - @JakobLichterfeld)
 - refactor(vehicle): date timestamp-less state rows through the clock seam (#5689 - @JakobLichterfeld)
+- fix(vehicle): keep logging when the car reports an outdated timestamp after being offline or asleep — previously the vehicle process crashed on every poll and the state stayed stuck (#5692 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -26,6 +27,11 @@ Under the hood, this release adds a self-verifying black-box characterization su
 - test(characterization): convert suspend_logging scenarios to characterization fixtures (#5687 - @JakobLichterfeld)
 - test(characterization): run replays on a scenario clock, retire timebase (#5690 - @JakobLichterfeld)
 - test(characterization): pin the stale-timestamp resume crash (#5691 - @JakobLichterfeld)
+- test(characterization): convert suspend scenarios to characterization fixtures (#5695 - @JakobLichterfeld)
+- test(characterization): convert summary scenarios to characterization fixtures (#5696 - @JakobLichterfeld)
+- test(characterization): convert vehicle scenarios to characterization fixtures, add the update_car_settings call (#5697 - @JakobLichterfeld)
+- test(characterization): convert the remaining vehicle scenarios — resume_logging and summary calls, expect_halt, seed positions, Vehicles stand-in (#5698 - @JakobLichterfeld)
+- test(characterization): pin charge samples without charger_power (#5700 - @JakobLichterfeld)
 
 #### Dashboards
 
