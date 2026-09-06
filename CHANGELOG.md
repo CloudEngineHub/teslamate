@@ -2,7 +2,11 @@
 
 ## [unreleased]
 
-Under the hood, this release adds a self-verifying black-box characterization suite that replays recorded API sequences through the real vehicle state machine and pins what leaves the system — database rows and MQTT messages. Converting the existing scenarios already paid off: it exposed a crash in the update-cancel path (#5656) that mock-based tests could not see.
+Under the hood, this release adds a self-verifying black-box characterization suite: recorded API sequences replay through the real vehicle state machine, and everything that leaves the system — database rows, MQTT messages, and the vehicle's interactions with the streaming API and its supervisor — is pinned against goldens. All existing vehicle scenarios are converted (120 fixtures).
+The work already paid off three times: it exposed a crash in the update-cancel path (#5656), a crash loop after an offline period when the car reports an outdated timestamp (#5684), and the published state start time jumping backwards after charging, updating or driving (#5693) — all fixed in this release — and it pinned a data-quality quirk for a later fix (#5699: a charge sample without charger power is stored as 0 kW).
+
+**Note for Home Assistant MQTT discovery users:** TeslaMate no longer re-runs the discovery migration on every restart, which briefly removed and recreated entities (#5667). Instead it clears the former per-entity topics and republishes the device config; Home Assistant logs one harmless "conflicting MQTT discovery message" warning per legacy topic after each restart, entities are untouched.
+Upgrading directly from 4.1.x no longer preserves entity registry customizations — see the [docs](https://docs.teslamate.org/docs/integrations/home_assistant#mqtt-discovery-automatic-configuration) (#5685).
 
 ### New features
 
@@ -13,6 +17,9 @@ Under the hood, this release adds a self-verifying black-box characterization su
 - refactor(vehicle): route the vehicle's view of time through a clock seam (#5688 - @JakobLichterfeld)
 - refactor(vehicle): date timestamp-less state rows through the clock seam (#5689 - @JakobLichterfeld)
 - fix(vehicle): keep logging when the car reports an outdated timestamp after being offline or asleep — previously the vehicle process crashed on every poll and the state stayed stuck (#5692 - @JakobLichterfeld)
+- feat: use Grafana 13.2.1 (#5694 - @swiffer)
+- fix(mqtt): stop re-running the Home Assistant discovery migration on every restart (#5685 - @nebhale)
+- fix(vehicle): keep the published state start time from jumping backwards after charging, updating or driving (#5706 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -32,6 +39,8 @@ Under the hood, this release adds a self-verifying black-box characterization su
 - test(characterization): convert vehicle scenarios to characterization fixtures, add the update_car_settings call (#5697 - @JakobLichterfeld)
 - test(characterization): convert the remaining vehicle scenarios — resume_logging and summary calls, expect_halt, seed positions, Vehicles stand-in (#5698 - @JakobLichterfeld)
 - test(characterization): pin charge samples without charger_power (#5700 - @JakobLichterfeld)
+- test(characterization): pin stream connect/disconnect and the supervisor kill as golden interactions (#5704 - @JakobLichterfeld)
+- test(characterization): name the scenario event behind a mismatch on a dated row (#5705 - @JakobLichterfeld)
 
 #### Dashboards
 

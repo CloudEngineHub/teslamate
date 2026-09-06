@@ -312,7 +312,7 @@ defmodule TeslaMate.CharacterizationTest do
   end
 
   @tag :tmp_dir
-  test "a summary call is pinned canonically — car masked, since volatile", %{tmp_dir: tmp} do
+  test "a summary call is pinned canonically — car masked, since a clock value", %{tmp_dir: tmp} do
     t0 = 1_704_067_200_000
 
     scenario =
@@ -328,7 +328,8 @@ defmodule TeslaMate.CharacterizationTest do
     golden = pair.golden_path |> File.read!() |> Jason.decode!()
     assert [%{"summary" => summary}] = golden["calls"]
     assert summary["car"] == "$car"
-    assert summary["since"] == "<volatile>"
+    # since is the replay clock's value for the online row's start: the first payload's time.
+    assert summary["since"] == "2024-01-01T00:00:00.000000Z"
     assert summary["state"] == "online"
     assert summary["battery_level"] == 80
   end
@@ -407,6 +408,88 @@ defmodule TeslaMate.CharacterizationTest do
     assert_raise ArgumentError, ~r/unknown position field "unknown_field"/, fn ->
       Characterization.record_pair(tmp_pair(tmp, "seed_unknown", scenario))
     end
+  end
+
+  @tag :tmp_dir
+  test "a golden without the interactions section diverges from a replay that records one",
+       %{tmp_dir: tmp} do
+    t0 = 1_704_067_200_000
+
+    scenario =
+      base_scenario("interactions probe", [
+        Map.put(park_event(t0), "snapshot", true),
+        park_event(t0 + 10_000)
+      ])
+
+    pair = tmp_pair(tmp, "interactions", scenario)
+    Characterization.record_pair(pair)
+
+    golden = pair.golden_path |> File.read!() |> Jason.decode!()
+    assert golden["interactions"] == [%{"after_serve" => 1, "stream" => "connect"}]
+
+    # The comparison is the harness's structural diff: a golden that lacks
+    # the section diverges from the capture that carries it.
+    assert {["interactions"], :__missing__, _} =
+             Characterization.diff(Map.delete(golden, "interactions"), golden)
+  end
+
+  @tag :tmp_dir
+  test "a mismatch on a dated row names the event whose cycle created it", %{tmp_dir: tmp} do
+    t0 = 1_704_067_200_000
+
+    scenario =
+      base_scenario("attribution probe", [
+        Map.put(park_event(t0), "snapshot", true),
+        drive_event(t0 + 10_000, 52.516, 10_000.2),
+        drive_event(t0 + 20_000, 52.52, 10_001.5),
+        put_in(park_event(t0 + 30_000), ["vehicle", "vehicle_state", "odometer"], 10_001.6),
+        %{"clock" => t0 + 60_000},
+        %{"vehicle" => %{"state" => "asleep"}}
+      ])
+      |> Map.put("await", %{"state" => "asleep"})
+
+    pair = tmp_pair(tmp, "attribution", scenario)
+    Characterization.record_pair(pair)
+    golden = pair.golden_path |> File.read!() |> Jason.decode!()
+    [_park, first_drive_position | _] = golden["database"]["positions"]
+    assert first_drive_position["date"] == "2024-01-01T00:00:10.000000"
+
+    # A non-date column of the row dated by the second payload: named exactly.
+    tampered = put_in(golden, ["database", "positions", Access.at(1), "speed"], 999)
+    message = Characterization.mismatch_message("attribution", tampered, golden, scenario)
+    assert message =~ "first divergence at database.positions.[1].speed"
+
+    assert message =~
+             "created in the cycle of event 2 (vehicle, serve 2, timestamp 1704067210000)"
+
+    # An end_date divergence names the closing event as well as the creating one.
+    tampered =
+      put_in(
+        golden,
+        ["database", "drives", Access.at(0), "end_date"],
+        "1999-01-01T00:00:00.000000"
+      )
+
+    message = Characterization.mismatch_message("attribution", tampered, golden, scenario)
+    assert message =~ "row dated 2024-01-01T00:00:10.000000 — created in the cycle of event 2"
+
+    assert message =~
+             "row closed 1999-01-01T00:00:00.000000 — closed before the first event (seed or clock-dated)"
+
+    # With the golden's end_date masked, the capture's date is attributed.
+    tampered = put_in(golden, ["database", "drives", Access.at(0), "end_date"], "<volatile>")
+    tampered = put_in(tampered, ["database", "drives", Access.at(0), "distance"], 0)
+    message = Characterization.mismatch_message("attribution", tampered, golden, scenario)
+    assert message =~ "row dated 2024-01-01T00:00:10.000000 — created in the cycle of event 2"
+
+    # The asleep row is clock-dated after the clock event: the distance, not a tick count.
+    [_online, asleep] = golden["database"]["states"]
+
+    assert Characterization.attribute_date(asleep["start_date"], scenario) ==
+             "2 ms after event 5 (clock, value 1704067260000)"
+
+    assert Characterization.attribute_date("2000-01-01T00:00:00.000000", scenario) ==
+             "before the first event (seed or clock-dated)"
   end
 
   defp base_scenario(description, events) do
@@ -492,6 +575,19 @@ defmodule TeslaMate.CharacterizationTest do
         }
       }
     }
+  end
+
+  defp drive_event(ts, latitude, odometer) do
+    park_event(ts)
+    |> update_in(["vehicle", "drive_state"], fn drive ->
+      Map.merge(drive, %{
+        "latitude" => latitude,
+        "shift_state" => "D",
+        "speed" => 60,
+        "power" => 15
+      })
+    end)
+    |> put_in(["vehicle", "vehicle_state", "odometer"], odometer)
   end
 
   for pair <- Characterization.pairs() do
