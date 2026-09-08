@@ -5,6 +5,8 @@
 Under the hood, this release adds a self-verifying black-box characterization suite: recorded API sequences replay through the real vehicle state machine, and everything that leaves the system — database rows, MQTT messages, and the vehicle's interactions with the streaming API and its supervisor — is pinned against goldens. All existing vehicle scenarios are converted (120 fixtures).
 The work already paid off three times: it exposed a crash in the update-cancel path (#5656), a crash loop after an offline period when the car reports an outdated timestamp (#5684), and the published state start time jumping backwards after charging, updating or driving (#5693) — all fixed in this release — and it pinned a data-quality quirk for a later fix (#5699: a charge sample without charger power is stored as 0 kW).
 
+The geo-fence links in the Grafana dashboards now open in the same tab, so the Back button returns to the dashboard and the Grafana URL is detected automatically again (#5709).
+
 **Note for Home Assistant MQTT discovery users:** TeslaMate no longer re-runs the discovery migration on every restart, which briefly removed and recreated entities (#5667). Instead it clears the former per-entity topics and republishes the device config; Home Assistant logs one harmless "conflicting MQTT discovery message" warning per legacy topic after each restart, entities are untouched.
 Upgrading directly from 4.1.x no longer preserves entity registry customizations — see the [docs](https://docs.teslamate.org/docs/integrations/home_assistant#mqtt-discovery-automatic-configuration) (#5685).
 
@@ -20,6 +22,9 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - feat: use Grafana 13.2.1 (#5694 - @swiffer)
 - fix(mqtt): stop re-running the Home Assistant discovery migration on every restart (#5685 - @nebhale)
 - fix(vehicle): keep the published state start time from jumping backwards after charging, updating or driving (#5706 - @JakobLichterfeld)
+- fix(web): pin the size of Leaflet's SVG overlay so the vehicle arrow and geofence circle stay on the map at any Safari page zoom (#5666 - @JakobLichterfeld)
+- fix(grafana): open the TeslaMate header link in a new tab so it works when Grafana and TeslaMate share an origin (#5626 - @misenhower)
+- fix(web): make the Back button return to the Grafana dashboard and detect the Grafana URL despite origin-only referrers (#5709 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -41,6 +46,18 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - test(characterization): pin charge samples without charger_power (#5700 - @JakobLichterfeld)
 - test(characterization): pin stream connect/disconnect and the supervisor kill as golden interactions (#5704 - @JakobLichterfeld)
 - test(characterization): name the scenario event behind a mismatch on a dated row (#5705 - @JakobLichterfeld)
+- build(deps): bump browserslist from 4.28.2 to 4.28.9 in /website (#5707)
+- build(deps): bump fast-uri from 3.1.5 to 3.1.7 in /website (#5686)
+- build(deps): bump http-proxy-middleware from 2.0.9 to 2.0.10 in /website (#5708)
+- build(deps): update flake.lock (#5659)
+- build(deps): bump the actions-deps group across 4 directories with 8 updates (#5679)
+- build(deps): bump phoenix from 1.8.9 to 1.8.13 (#5672)
+- build(deps): bump postgrex from 0.22.3 to 0.22.4 (#5673)
+- build(deps-dev): bump sass from 1.102.0 to 1.103.1 in /assets (#5674)
+- build(deps-dev): bump esbuild from 0.28.1 to 0.28.2 in /assets (#5675)
+- build(deps): bump castore from 1.0.20 to 1.0.21 (#5676)
+- build(deps): bump srtm from 0.8.0 to 0.9.0 (#5677)
+- build(deps): bump phoenix_live_view from 1.2.8 to 1.2.11 (#5678)
 
 #### Dashboards
 
