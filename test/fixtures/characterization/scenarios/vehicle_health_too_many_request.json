@@ -7,7 +7,7 @@
     "vid": 1000,
     "vin": "5YJ3E1EA1KF000001"
   },
-  "description": "Conversion of 'error handling: ends a drive if vehicle is in service' (streaming): two D polls start a drive with two positions, then vehicle_in_service closes the drive, disconnects the stream and returns the machine through :start. The two positions carry different odometer values so the drive has a distance (drives under 0.01 km are deleted on close) \u2014 a deviation from the original payload, which drives without moving. The asleep terminal then sleeps the machine through the probe without writing; no await, because close_drive runs on the error serve, before the terminal. The asleep terminal casts a second disconnect at the already disconnected stream because the in-service branch leaves stream_pid set (#5742); the stream process is gone by then, so the cast is lost as in production \u2014 the interactions section shows one disconnect.",
+  "description": "Rate limiting keeps the vehicle healthy: twin of vehicle_health_api_errors with its four generic errors replaced by four too_many_request responses (retry after 900 s). The fetch-result handler's too_many_request clause backs off by the retry-after seconds without melting the api_error fuse, so healthy stays true where the generic errors publish false; the state stays online. The backoff itself is timing and not visible. Outside the healthy topic the golden is expected to equal vehicle_health_api_errors. The online terminal stays online and writes nothing.",
   "events": [
     {
       "snapshot": true,
@@ -78,12 +78,12 @@
         },
         "display_name": "blue",
         "drive_state": {
-          "heading": 42,
-          "latitude": 52.516,
-          "longitude": 13.3525,
-          "power": 15,
-          "shift_state": "D",
-          "speed": 8,
+          "heading": 120,
+          "latitude": 52.514521,
+          "longitude": 13.350144,
+          "power": 0,
+          "shift_state": null,
+          "speed": null,
           "timestamp": 1704067210000
         },
         "id": 42,
@@ -101,11 +101,31 @@
           "car_version": "2026.20.1 abc123",
           "is_user_present": false,
           "locked": true,
-          "odometer": 10000.17,
+          "odometer": 10000.0,
           "sentry_mode": false,
           "timestamp": 1704067210000
         },
         "vin": "5YJ3E1EA1KF000001"
+      }
+    },
+    {
+      "error": {
+        "too_many_request": 900
+      }
+    },
+    {
+      "error": {
+        "too_many_request": 900
+      }
+    },
+    {
+      "error": {
+        "too_many_request": 900
+      }
+    },
+    {
+      "error": {
+        "too_many_request": 900
       }
     },
     {
@@ -127,12 +147,12 @@
         },
         "display_name": "blue",
         "drive_state": {
-          "heading": 42,
-          "latitude": 52.52,
-          "longitude": 13.36,
-          "power": 20,
-          "shift_state": "D",
-          "speed": 80,
+          "heading": 120,
+          "latitude": 52.514521,
+          "longitude": 13.350144,
+          "power": 0,
+          "shift_state": null,
+          "speed": null,
           "timestamp": 1704067220000
         },
         "id": 42,
@@ -150,19 +170,11 @@
           "car_version": "2026.20.1 abc123",
           "is_user_present": false,
           "locked": true,
-          "odometer": 10001.02,
+          "odometer": 10000.0,
           "sentry_mode": false,
           "timestamp": 1704067220000
         },
         "vin": "5YJ3E1EA1KF000001"
-      }
-    },
-    {
-      "error": "vehicle_in_service"
-    },
-    {
-      "vehicle": {
-        "state": "asleep"
       }
     }
   ],
