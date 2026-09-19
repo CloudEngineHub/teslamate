@@ -2,16 +2,16 @@
 
 ## [unreleased]
 
-Under the hood, this release adds a self-verifying black-box characterization suite: recorded API sequences replay through the real vehicle state machine, and everything that leaves the system — database rows, MQTT messages, and the vehicle's interactions with the streaming API and its supervisor — is pinned against goldens. All existing vehicle scenarios are converted (167 fixtures).
-The work already paid off three times: it exposed a crash in the update-cancel path (#5656), a crash loop after an offline period when the car reports an outdated timestamp (#5684), and the published state start time jumping backwards after charging, updating or driving (#5693) — all fixed in this release — and it surfaced five findings for a later fix: a charge sample without charger power is stored as 0 kW (#5699),
-a stream going inactive while logging is suspended can start a second fetch alongside the running poll (#5714), two dead clauses in the model mapping and the stale-frame check (#5716, #5718), and a car returning online after a service visit runs without its stream until the next drive (#5742).
-
+Under the hood, this release adds a self-verifying black-box characterization suite: recorded API sequences replay through the real vehicle state machine, and everything that leaves the system — database rows, MQTT messages, and the vehicle's interactions with the streaming API and its supervisor — is compared against known-good results with 93.9 % coverage.
+It is the basis for the upcoming rework of the state machine and the Rust rewrite, and writing it already uncovered three bugs, all fixed in this release (#5656, #5684, #5693). Five more findings (#5699, #5714, #5716, #5718, #5742) sit in code the rework replaces, so they are fixed there instead of patched twice.
 The geo-fence links in the Grafana dashboards now open in the same tab, so the Back button returns to the dashboard and the Grafana URL is detected automatically again (#5709).
 
 **Note for Home Assistant MQTT discovery users:** TeslaMate no longer re-runs the discovery migration on every restart, which briefly removed and recreated entities (#5667). Instead it clears the former per-entity topics and republishes the device config; Home Assistant logs one harmless "conflicting MQTT discovery message" warning per legacy topic after each restart, entities are untouched.
 Upgrading directly from 4.1.x no longer preserves entity registry customizations — see the [docs](https://docs.teslamate.org/docs/integrations/home_assistant#mqtt-discovery-automatic-configuration) (#5685).
 
 ### New features
+
+- feat(webview): make the vehicle display order editable on the settings page (#5741 - @wooter)
 
 ### Improvements and bug fixes
 
@@ -26,6 +26,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - fix(web): pin the size of Leaflet's SVG overlay so the vehicle arrow and geofence circle stay on the map at any Safari page zoom (#5666 - @JakobLichterfeld)
 - fix(grafana): open the TeslaMate header link in a new tab so it works when Grafana and TeslaMate share an origin (#5626 - @misenhower)
 - fix(web): make the Back button return to the Grafana dashboard and detect the Grafana URL despite origin-only referrers (#5709 - @JakobLichterfeld)
+- refactor(vehicle): simplify the state machine: plain atom states, DB records moved into the state data (#5259 - @brianmay, @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -75,6 +76,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - test(characterization): pin a drive in import mode — no address lookup, halt on import_complete (#5737 - @JakobLichterfeld)
 - test(characterization): add the too_many_request error form, seed.updates and per-scenario Home Assistant discovery to the harness, with first users (#5740 - @JakobLichterfeld)
 - test(characterization): pin the reconnecting stream controls and the missing stream after a service visit (#5743 - @JakobLichterfeld)
+- test(vehicle): make the store-position interval configurable and lock the state-machine field lifecycle with regression tests (#5259 - @JakobLichterfeld)
 
 #### Dashboards
 
