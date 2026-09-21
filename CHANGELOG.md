@@ -12,6 +12,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 ### New features
 
 - feat(webview): make the vehicle display order editable on the settings page (#5741 - @wooter)
+- feat(web): explain why no vehicle is logged and offer a reload button that starts loggers for vehicles added to the Tesla account, instead of requiring a restart (#5710 - @JakobLichterfeld)
 
 ### Improvements and bug fixes
 
@@ -27,6 +28,8 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - fix(grafana): open the TeslaMate header link in a new tab so it works when Grafana and TeslaMate share an origin (#5626 - @misenhower)
 - fix(web): make the Back button return to the Grafana dashboard and detect the Grafana URL despite origin-only referrers (#5709 - @JakobLichterfeld)
 - refactor(vehicle): simplify the state machine: plain atom states, DB records moved into the state data (#5259 - @brianmay, @JakobLichterfeld)
+- feat: use Grafana 13.2.2 (#5744 - @swiffer)
+- fix(web): send the referrer and show the OpenStreetMap attribution on map tiles, so tiles load behind reverse proxies that set a stricter referrer policy such as same-origin or no-referrer and TeslaMate complies with the OSM tile usage policy (#5765 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -81,14 +84,28 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - chore(ci): fix the shellcheck and untrusted-input findings from actionlint (#5759 - @JakobLichterfeld)
 - fix(ci): apply the OCI labels to the Grafana images (#5761 - @JakobLichterfeld)
 - fix(ci): pass the build action inputs through env and expressions (#5762 - @JakobLichterfeld)
+- build(deps): bump react and react-dom from 19.2.8 to 19.3.0 in /website (#5751)
+- build(deps): bump nanoid from 3.3.16 to 3.3.19 in /website (5760)
+- build(deps): bump the actions-deps group across 4 directories with 7 updates (#5758)
+- build(deps): bump elixir from 1.20.2-otp-29 to 1.20.3-otp-29 (#5747)
+- build(deps-dev): bump sass from 1.103.1 to 1.104.1 in /elixir/assets (#5749)
+- build(deps): bump @geoman-io/leaflet-geoman-free from 2.20.0 to 2.20.1 in /elixir/assets (5750)
+- build(deps-dev): bump phoenix_live_reload from 1.6.2 to 1.7.0 in /elixir (#5753)
+- build(deps-dev): bump credo from 1.7.18 to 1.7.19 in /elixir (#5755)
+- build(deps): bump ecto_sql from 3.13.5 to 3.14.0 in /elixir (#5757)
+- build(deps): update flake.lock (#5728)
+- feat(rust): add the Rust core skeleton under rust/ — crate, CI with path routing, Nix package and devenv toolchain (#5703 - @brianmay, @JakobLichterfeld)
 
 #### Dashboards
+
+- feat(grafana): add `total` period to the Statistics dashboard for one aggregated row over the selected time range (#5680 - @micku7zu)
 
 #### Translations
 
 #### Documentation
 
 - docs: add AI-assisted contribution policy and Grafana dashboard notes (#5578 - @swiffer)
+- docs(faq): explain how to add a car that shows up in the Tesla account after start-up and reorder the entries (#5766 - @JakobLichterfeld)
 
 ## [4.2.0] - 2026-08-23
 
