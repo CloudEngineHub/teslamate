@@ -30,6 +30,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - refactor(vehicle): simplify the state machine: plain atom states, DB records moved into the state data (#5259 - @brianmay, @JakobLichterfeld)
 - feat: use Grafana 13.2.2 (#5744 - @swiffer)
 - fix(web): send the referrer and show the OpenStreetMap attribution on map tiles, so tiles load behind reverse proxies that set a stricter referrer policy such as same-origin or no-referrer and TeslaMate complies with the OSM tile usage policy (#5765 - @JakobLichterfeld)
+- fix(web): show VIN and trim tooltips below the car title on mobile, so they no longer get cut off at the left edge (#5774 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -95,10 +96,19 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - build(deps): bump ecto_sql from 3.13.5 to 3.14.0 in /elixir (#5757)
 - build(deps): update flake.lock (#5728)
 - feat(rust): add the Rust core skeleton under rust/ — crate, CI with path routing, Nix package and devenv toolchain (#5703 - @brianmay, @JakobLichterfeld)
+- build(rust): choose Tokio as the async runtime (#5772 - @brianmay)
+- build(deps): bump tzdata from 1.1.4 to 1.2.1 in /elixir (#5771)
+- build(deps): remove unused hackney lock entries after tzdata 1.2.1 (#5771 - @JakobLichterfeld)
+- build(deps): bump tesla from 1.20.0 to 1.21.3 in /elixir (#5767)
+- build(deps): bump phoenix_live_view from 1.2.11 to 1.2.12 in /elixir (#5768)
+- build(deps-dev): bump dialyxir from 1.4.7 to 1.4.8 in /elixir (#5769)
+- build(deps): bump tortoise311 from 0.12.2 to 0.12.3 in /elixir (#5770)
+- fix(test): restart cars_id_seq at suite start so smallint cars.id never overflows across local runs (#5773 - @JakobLichterfeld)
 
 #### Dashboards
 
 - feat(grafana): add `total` period to the Statistics dashboard for one aggregated row over the selected time range (#5680 - @micku7zu)
+- fix(grafana): count asleep/offline states that cross a parking boundary in the vampire drain standby time (#5729 - @rewse)
 
 #### Translations
 
@@ -106,6 +116,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 
 - docs: add AI-assisted contribution policy and Grafana dashboard notes (#5578 - @swiffer)
 - docs(faq): explain how to add a car that shows up in the Tesla account after start-up and reorder the entries (#5766 - @JakobLichterfeld)
+- docs: declare MQTT the only supported integration surface; database and web routes are internal (#5774 - @JakobLichterfeld)
 
 ## [4.2.0] - 2026-08-23
 
