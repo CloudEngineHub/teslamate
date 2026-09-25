@@ -13,6 +13,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 
 - feat(webview): make the vehicle display order editable on the settings page (#5741 - @wooter)
 - feat(web): explain why no vehicle is logged and offer a reload button that starts loggers for vehicles added to the Tesla account, instead of requiring a restart (#5710 - @JakobLichterfeld)
+- feat(web): show the copyright, license and no-warranty notice in the footer, with the NOTICE and LICENSE of the running version (#5779 - @JakobLichterfeld)
 
 ### Improvements and bug fixes
 
@@ -33,6 +34,9 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - fix(web): show VIN and trim tooltips below the car title on mobile, so they no longer get cut off at the left edge (#5774 - @JakobLichterfeld)
 - legal: add NOTICE and state AGPL-3.0-or-later consistently (#5777 - @JakobLichterfeld)
 - legal: rewrite the trademark policy with definitions and an exhaustive list of permitted uses (#5777 - @JakobLichterfeld)
+- fix(auth): no longer follow redirects when refreshing the token, so the refresh token and the fleet token are never sent to another host (#5781 - @JakobLichterfeld)
+- fix(auth): tell rejected tokens apart from every other refresh failure, so the sign-in page names the actual cause (#5781 - @JakobLichterfeld)
+- fix(web): report a sign-in that exits instead of crashing the sign-in page (#5781 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -106,6 +110,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - build(deps-dev): bump dialyxir from 1.4.7 to 1.4.8 in /elixir (#5769)
 - build(deps): bump tortoise311 from 0.12.2 to 0.12.3 in /elixir (#5770)
 - fix(test): restart cars_id_seq at suite start so smallint cars.id never overflows across local runs (#5773 - @JakobLichterfeld)
+- build: ship NOTICE and LICENSE in both images and both Nix packages, and declare AGPL-3.0-or-later in the Nix metadata (#5778 - @JakobLichterfeld)
 
 #### Dashboards
 
@@ -119,6 +124,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - docs: add AI-assisted contribution policy and Grafana dashboard notes (#5578 - @swiffer)
 - docs(faq): explain how to add a car that shows up in the Tesla account after start-up and reorder the entries (#5766 - @JakobLichterfeld)
 - docs: declare MQTT the only supported integration surface; database and web routes are internal (#5774 - @JakobLichterfeld)
+- docs: list the web interface languages with their English fallback, and show the Trendshift ranking under Popularity (#5780 - @JakobLichterfeld)
 
 ## [4.2.0] - 2026-08-23
 
