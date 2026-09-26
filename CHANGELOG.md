@@ -37,6 +37,9 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - fix(auth): no longer follow redirects when refreshing the token, so the refresh token and the fleet token are never sent to another host (#5781 - @JakobLichterfeld)
 - fix(auth): tell rejected tokens apart from every other refresh failure, so the sign-in page names the actual cause (#5781 - @JakobLichterfeld)
 - fix(web): report a sign-in that exits instead of crashing the sign-in page (#5781 - @JakobLichterfeld)
+- fix(auth): keep credentials out of the log, even on the debug level (#5782 - @JakobLichterfeld)
+- feat(web): skip the modal animation when the system asks for reduced motion, with own fade and scale CSS (#5784 - @JakobLichterfeld)
+- fix(geocoder): fill the address fields by Nominatim's address ranks (#5785 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -111,13 +114,20 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - build(deps): bump tortoise311 from 0.12.2 to 0.12.3 in /elixir (#5770)
 - fix(test): restart cars_id_seq at suite start so smallint cars.id never overflows across local runs (#5773 - @JakobLichterfeld)
 - build: ship NOTICE and LICENSE in both images and both Nix packages, and declare AGPL-3.0-or-later in the Nix metadata (#5778 - @JakobLichterfeld)
+- build(deps): bump image-size from 2.0.2 to 2.0.4 in /website (#5783)
+- test(geocoder): pin which address label fills which field, and in which order (#5785 - @JakobLichterfeld)
+- test(geocoder): pin the address fields of 19 recorded Nominatim addresses (#5785 - @JakobLichterfeld)
+- build: stop building the Grafana image for ARMv7, which is no longer supported (#5788 - @JakobLichterfeld)
 
 #### Dashboards
 
 - feat(grafana): add `total` period to the Statistics dashboard for one aggregated row over the selected time range (#5680 - @micku7zu)
 - fix(grafana): count asleep/offline states that cross a parking boundary in the vampire drain standby time (#5729 - @rewse)
+- fix(grafana): fall back to the neighbourhood where an address has no city (#5785 - @JakobLichterfeld)
 
 #### Translations
+
+- fix(i18n): translate the import page, the car summary, the car order setting and the validation errors into German (#5786 - @JakobLichterfeld)
 
 #### Documentation
 
@@ -125,6 +135,7 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - docs(faq): explain how to add a car that shows up in the Tesla account after start-up and reorder the entries (#5766 - @JakobLichterfeld)
 - docs: declare MQTT the only supported integration surface; database and web routes are internal (#5774 - @JakobLichterfeld)
 - docs: list the web interface languages with their English fallback, and show the Trendshift ranking under Popularity (#5780 - @JakobLichterfeld)
+- docs: state that the image SBOM lists only the Debian packages and the Erlang and Elixir runtime, and why (#5787 - @JakobLichterfeld)
 
 ## [4.2.0] - 2026-08-23
 
