@@ -40,6 +40,8 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - fix(auth): keep credentials out of the log, even on the debug level (#5782 - @JakobLichterfeld)
 - feat(web): skip the modal animation when the system asks for reduced motion, with own fade and scale CSS (#5784 - @JakobLichterfeld)
 - fix(geocoder): fill the address fields by Nominatim's address ranks (#5785 - @JakobLichterfeld)
+- legal: declare copyright and license of every file in REUSE.toml and check REUSE compliance in CI (#5789 - @JakobLichterfeld)
+- legal: add the MIT notice to NOTICE for earlier contributions the relicensing does not cover (#5789 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -118,6 +120,9 @@ Upgrading directly from 4.1.x no longer preserves entity registry customizations
 - test(geocoder): pin which address label fills which field, and in which order (#5785 - @JakobLichterfeld)
 - test(geocoder): pin the address fields of 19 recorded Nominatim addresses (#5785 - @JakobLichterfeld)
 - build: stop building the Grafana image for ARMv7, which is no longer supported (#5788 - @JakobLichterfeld)
+- build(deps): update flake.lock (#5790)
+- feat(rust): read the configuration from environment variables and take the version from the VERSION file (#5776 - @brianmay, @JakobLichterfeld)
+- fix(nix): trim the VERSION file for the Elixir package, so a trailing newline no longer ends up in its name (#5776 - @JakobLichterfeld)
 
 #### Dashboards
 
