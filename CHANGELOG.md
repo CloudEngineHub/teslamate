@@ -9,10 +9,25 @@
 - feat: use Grafana 13.2.3 (#5803 - @swiffer)
 - fix(docker): install the CA certificates, so Tzdata can verify TLS and download time zone updates (#5808 - @JakobLichterfeld)
 - fix: use the position's latitude when re-assigning drives and charges to geofences (#5820 - @JakobLichterfeld)
+- fix: re-assign drives and charges only when a geofence's location or radius changes (#5823 - @JakobLichterfeld)
+- perf(web): connect to the map tile server early, so maps appear sooner (#5826 - @JakobLichterfeld)
+- fix(web): label cars without a name by their VIN in the settings, like the car summary (#5821 - @TUNER88)
+- fix(web): label cars without a name by their VIN on the charge cost page and in the vehicle reload hint, like the car summary (#5827 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
 - fix: read TeslaMate's version from one module so a VERSION bump cannot leave a stale copy (#5804 - @swiffer, @JakobLichterfeld)
+- build(deps): update flake.lock (#5822)
+- build(deps): bump localize from 1.2.0 to 1.3.0 in /elixir (#5811)
+- build(deps-dev): bump sass from 1.104.1 to 1.105.0 in /elixir/assets (#5812)
+- build(deps): bump @geoman-io/leaflet-geoman-free from 2.20.1 to 2.20.2 in /elixir/assets (#5813)
+- build(deps): bump phoenix from 1.8.14 to 1.8.15 in /elixir (#5814)
+- build(deps): bump tzdata from 1.2.1 to 1.2.2 in /elixir (#5815)
+- build(deps-dev): bump lazy_html from 0.1.12 to 0.1.13 in /elixir (#5816)
+- build(deps): bump crate-ci/typos from 1.50.2 to 1.50.3 in the actions-deps group across 1 directory (#5817)
+- build(deps): bump fast-uri from 3.1.7 to 3.1.8 in /website (#5824)
+- build(deps): bump brace-expansion from 1.1.18 to 1.1.21 in /website (#5825)
+- build(nix): add rustc and lldb to the devenv shell, so rust-analyzer finds the sysroot in every editor and Rust can be debugged (#5796 - @brianmay)
 
 #### Dashboards
 
