@@ -14,6 +14,10 @@
 - sec(deps): update rustls to version 0.23.46 in /rust (#5900 - @JakobLichterfeld)
 - sec(deps): update webpack-dev-middleware to version 7.4.6 in /website (#5901 - @JakobLichterfeld)
 - fix(test): group the canonical_call clauses so the characterization harness compiles with warnings as errors (#5898 - @swiffer)
+- ci(elixir): compile the test env with warnings as errors so warnings in test/support fail the Elixir Test job (#5913 - @JakobLichterfeld)
+- build(deps): update flake.lock (#5904)
+- build(deps): bump fast-uri from 3.1.8 to 3.1.9 in /website (#5914)
+- build(deps): bump body-parser from 1.20.8 to 1.20.9 in /website (#5915)
 
 #### Dashboards
 
