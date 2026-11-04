@@ -19,6 +19,9 @@
 - fix(vehicle): no longer hold a database connection while looking up the address at charging start (#5929 - @JakobLichterfeld)
 - fix(vehicle): no longer hold a database connection while looking up the addresses at the end of a drive (#5929 - @JakobLichterfeld)
 - fix(locations): space all requests to Nominatim for the whole app, as its usage policy asks (#5929 - @JakobLichterfeld)
+- fix(vehicle): record the elevation and the full ascent and descent of drives during which the stream stopped sending positions (#5940 - @JakobLichterfeld)
+- fix(terrain): add the missing elevation to every drive once it has ended, also to a drive closed by hand long after and, once after an import, to the imported drives, and update their ascent and descent (#5940 - @JakobLichterfeld)
+- fix(vehicle): no longer hold a database connection while looking up the terrain elevation, and no longer crash when that lookup is slow or not yet available (#5940 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -38,12 +41,26 @@
 - test(locations): fail every test that geocodes while holding a database connection (#5929 - @JakobLichterfeld)
 - test(repair): cover the pacing of the address repair, without sleeping (#5929 - @JakobLichterfeld)
 - build(elixir): run mix ci in the test env with the same checks as CI, warnings as errors and the gettext check included (#5929 - @JakobLichterfeld)
+- test(vehicle): pin the elevation, ascent and descent of a drive whose stream stops sending positions in a characterization scenario (#5940 - @JakobLichterfeld)
+- test(vehicle): hold API events in the vehicle tests through one helper (#5940 - @JakobLichterfeld)
+- test(characterization): replay the Terrain repair end to end, also for a drive closed by hand long after a crash (#5940 - @JakobLichterfeld)
+- build(deps): bump the actions-deps group across 2 directories with 1 update (#5938)
+- build(deps): bump elixir from 1.20.3-otp-29 to 1.20.4-otp-29 (#5931)
+- build(deps): bump localize from 1.3.0 to 1.6.0 and localize_web from 1.1.0 to 1.3.0 in /elixir (#5933)
+- build(deps): bump @geoman-io/leaflet-geoman-free from 2.20.2 to 2.20.4 in /elixir/assets (#5935)
+- build(deps): bump tokio from 1.53.3 to 1.54.1 in /rust (#5934)
+- build(deps-dev): bump sass from 1.105.2 to 1.106.1 in /elixir/assets (#5936)
+- build(deps): bump follow-redirects from 1.16.1 to 1.16.2 in /website (#5946)
+- build(deps): bump joi from 17.13.8 to 17.13.9 in /website (#5947)
 
 #### Dashboards
 
 - perf(grafana): draw the Charge Level moving percentiles several times faster (#5930 - @Dulanic)
+- fix(grafana): the current usable capacity in Battery Health averages your last 10 charges instead of jumping with each one (#5943 - @Vihvila92)
 
 #### Translations
+
+- i18n(zh_Hant): translate new web UI strings (#5932 - @occultsound)
 
 #### Documentation
 
