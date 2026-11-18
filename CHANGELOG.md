@@ -4,6 +4,31 @@
 
 ### New features
 
+### Improvements and bug fixes
+
+#### Build, CI, internal
+
+#### Dashboards
+
+#### Translations
+
+#### Documentation
+
+## [4.5.0] - 2026-11-17
+
+TeslaMate now publishes the car's VIN over MQTT and shows it as the serial number in the Home Assistant device info, and we use the latest Grafana (13.3.1).
+
+Garbled data from Tesla's stream no longer makes MQTT and Home Assistant show wrong values, and TeslaMate then reconnects to the stream, so correct data arrives again sooner.
+Every drive now gets its elevation, ascent and descent, also when the stream stopped sending positions.
+Changing the address language with many stored addresses no longer crashes the settings page, and Battery Health averages your last 10 charges instead of jumping with each one.
+The Charge Level dashboard draws its moving percentiles several times faster, and looking up addresses or the terrain elevation no longer holds a database connection while waiting.
+
+To make your TeslaMate experience even better, we have made 74 improvements.
+
+Enjoy!
+
+### New features
+
 - feat(mqtt): publish the vehicle's VIN (#5950 - @DennisGarvey)
 
 ### Improvements and bug fixes
@@ -30,6 +55,7 @@
 - fix(mqtt): publish whole-number values from 1000 (e.g. an odometer of 13000 km) and very small values as plain numbers instead of exponent notation like "1.3e4" (#5967 - @JakobLichterfeld)
 - feat: use Grafana 13.3.1 (#5968 - @JakobLichterfeld)
 - feat(mqtt): show the VIN as the serial number in the Home Assistant device info (#5966 - @DennisGarvey)
+- fix(locale): pick the language only from those TeslaMate is translated into, so that the locale "und" falls back to the default language (#5973 - @JakobLichterfeld)
 
 #### Build, CI, internal
 
@@ -69,6 +95,12 @@
 - build(deps-dev): bump dialyxir from 1.4.8 to 1.4.9 in /elixir (#5970)
 - build(deps): bump floki from 0.38.4 to 0.38.5 in /elixir (#5971)
 - build(deps-dev): bump sass from 1.106.1 to 1.108.1 in /elixir/assets (#5972)
+- build(deps): bump localize from 1.6.0 to 1.7.1 and localize_web from 1.3.0 to 1.3.1 in /elixir (#5973)
+- build(deps): bump @geoman-io/leaflet-geoman-free from 2.20.4 to 2.20.6 in /elixir/assets (#5974)
+- build(deps): bump the actions-deps group across 2 directories with 4 updates (#5976)
+- build(deps): bump timex from 3.7.13 to 4.0.0 in /elixir, remove override on gettext (#5977)
+- sec(deps): raise serialize-javascript override to version 7.1.3 in /website (#5978 - @JakobLichterfeld)
+- sec(deps): update ecto to version 3.14.3 in /elixir (#5979 - @JakobLichterfeld)
 
 #### Dashboards
 
@@ -3434,7 +3466,8 @@ New users need to sign in via the web interface.
 
 ## [1.0.0] - 2019-07-25
 
-[unreleased]: https://github.com/teslamate-org/teslamate/compare/v4.4.0...HEAD
+[unreleased]: https://github.com/teslamate-org/teslamate/compare/v4.5.0...HEAD
+[4.5.0]: https://github.com/teslamate-org/teslamate/compare/v4.4.0...v4.5.0
 [4.4.0]: https://github.com/teslamate-org/teslamate/compare/v4.3.0...v4.4.0
 [4.3.0]: https://github.com/teslamate-org/teslamate/compare/v4.2.0...v4.3.0
 [4.2.0]: https://github.com/teslamate-org/teslamate/compare/v4.1.1...v4.2.0
