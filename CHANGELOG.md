@@ -7,12 +7,15 @@
 ### Improvements and bug fixes
 
 - feat: officially support PostgreSQL 19 (#5982 - @swiffer)
+- fix(vehicle): broadcast the summary on every poll while an update is installing, so the installation progress on MQTT no longer stays stale (#5985 - @JakobLichterfeld, @luvs01)
 
 #### Build, CI, internal
 
 #### Dashboards
 
 #### Translations
+
+- fix(i18n): restore the placeholders that translations dropped or misnamed, so the software update tooltip shows its percentage in nine languages, and the range at 100% and the number validation errors show their values in Japanese (#5986 - @JakobLichterfeld)
 
 #### Documentation
 
