@@ -10,12 +10,17 @@
 
 - feat: officially support PostgreSQL 19 (#5982 - @swiffer)
 - fix(vehicle): broadcast the summary on every poll while an update is installing, so the installation progress on MQTT no longer stays stale (#5985 - @JakobLichterfeld, @luvs01)
+- feat: use Grafana 13.3.2 (#6001 - @swiffer)
 
 #### Build, CI, internal
 
 - ci: build PR images from the head of the pull request instead of GitHub's merge commit, so they hold exactly the branch under test (#5994 - @JakobLichterfeld)
 - build(deps): update flake.lock (#5984)
 - build(treefmt): no longer simplify shell scripts with shfmt, as the updated treefmt-nix does (#5984 - @JakobLichterfeld)
+- ci: add result gates as the required checks of DevOps and GHCR build (#6002 - @JakobLichterfeld)
+- ci: drop the unused packages write permission from the DevOps workflow (#6002 - @JakobLichterfeld)
+- ci: fail the result gates for held-back runs only on pull requests (#6003 - @JakobLichterfeld)
+- fix(ci): download the per-platform digests directly in the merge action, so that it no longer fails to find a just-uploaded artifact (#6004 - @JakobLichterfeld)
 
 #### Dashboards
 
