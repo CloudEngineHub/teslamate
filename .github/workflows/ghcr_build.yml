@@ -21,24 +21,27 @@ on:
   # someone with write access. The job conditions below allow for it.
   workflow_dispatch:
 
+# A newer run on the same ref supersedes the older one, so the older one is
+# cancelled. On pull requests the ref is refs/pull/<number>/merge, so this
+# applies per pull request.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   REGISTRY_IMAGE: ghcr.io/${{ github.repository }}
 
 permissions:
   contents: read
-  packages: write
-  id-token: write
-  attestations: write
-  artifact-metadata: write
 
 jobs:
   check_paths:
-    uses: ./.github/workflows/check_paths.yml
+    uses: $/.github/workflows/check_paths.yml
 
   check_if_pr_from_outside_repo:
     needs: check_paths
     if: needs.check_paths.outputs.githubfolder == 'false' || github.event_name == 'workflow_dispatch'
-    uses: ./.github/workflows/check_if_pr_from_outside_repo.yml
+    uses: $/.github/workflows/check_if_pr_from_outside_repo.yml
 
   teslamate_build:
     name: Build images
@@ -59,6 +62,14 @@ jobs:
 
     runs-on: ${{ matrix.runs_on }}
     timeout-minutes: 10
+    # Granted only to the jobs that push images and attest them, instead of
+    # to every job through the workflow level.
+    permissions:
+      contents: read
+      packages: write # required to push the image, cache and attestations
+      id-token: write # required to sign the attestations
+      attestations: write # required to store provenance and SBOM attestations
+      artifact-metadata: write # required to create the artifact storage records
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         id: checkout
@@ -69,11 +80,11 @@ jobs:
           # test. Empty for other events, which keeps the default ref of the
           # event.
           ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
 
       - name: Buildx
-        uses: ./.github/actions/build
+        uses: $/.github/actions/build
         with:
-          docker_password: ${{ secrets.DOCKER_PASSWORD }}
           repository_owner: ${{ github.repository_owner }}
           repository: ${{ github.repository }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -90,9 +101,17 @@ jobs:
     if: needs.check_paths.outputs.githubfolder == 'false' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    # Granted only to the jobs that push images and attest them, instead of
+    # to every job through the workflow level.
+    permissions:
+      contents: read
+      packages: write # required to push the manifest list and attestation
+      id-token: write # required to sign the attestation
+      attestations: write # required to store the provenance attestation
+      artifact-metadata: write # required to create the artifact storage record
+    # No checkout: `$/` loads the merge action from the running commit, and
+    # the action reads only the downloaded digests and the workflow context.
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - name: Login to GitHub Container Registry
         uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
         with:
@@ -101,18 +120,29 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Merge
         id: merge
-        uses: ./.github/actions/merge
+        uses: $/.github/actions/merge
         with:
           image: ${{ env.REGISTRY_IMAGE }}
 
   grafana:
+    name: Build Grafana image
     needs:
       - check_paths
       - check_if_pr_from_outside_repo
     if: (needs.check_paths.outputs.githubfolder == 'false' && needs.check_if_pr_from_outside_repo.outputs.is_pr_from_outside_repo == 'false') || (github.event_name == 'workflow_dispatch' && needs.check_if_pr_from_outside_repo.outputs.is_pr_from_outside_repo == 'false')
     runs-on: ubuntu-24.04
+    # Granted only to the jobs that push images and attest them, instead of
+    # to every job through the workflow level.
+    permissions:
+      contents: read
+      packages: write # required to push the image and attestation
+      id-token: write # required to sign the attestation
+      attestations: write # required to store the provenance attestation
+      artifact-metadata: write # required to create the artifact storage record
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
@@ -121,7 +151,7 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: ./.github/actions/grafana
+      - uses: $/.github/actions/grafana
         with:
           image: ${{ env.REGISTRY_IMAGE }}/grafana
           labels: |

@@ -1,7 +1,6 @@
 name: Publish Docker images
 
 on:
-  workflow_call:
   schedule:
     - cron: "0 3 * * *"
   push:
@@ -18,21 +17,26 @@ on:
   # write access. The job conditions below allow for it. Note that this
   # publishes: a run from a branch overwrites the edge tag.
   workflow_dispatch:
+
+# A newer run on the same ref supersedes the older one, so the older one is
+# cancelled. Each tag is its own ref, so release builds never cancel each
+# other.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   REGISTRY_IMAGE: teslamate/teslamate
 
 permissions:
   contents: read
-  packages: write
-  id-token: write
-  attestations: write
-  artifact-metadata: write
 
 jobs:
   check_paths:
-    uses: ./.github/workflows/check_paths.yml
+    uses: $/.github/workflows/check_paths.yml
 
   teslamate_build:
+    name: Build images
     needs: check_paths
     if: needs.check_paths.outputs.githubfolder == 'false' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     strategy:
@@ -48,13 +52,23 @@ jobs:
 
     runs-on: ${{ matrix.runs_on }}
     timeout-minutes: 10
+    # Granted only to the jobs that push images and attest them, instead of
+    # to every job through the workflow level.
+    permissions:
+      contents: read
+      packages: write # required to push the build cache to ghcr.io
+      id-token: write # required to sign the attestations
+      attestations: write # required to store provenance and SBOM attestations
+      artifact-metadata: write # required to create the artifact storage records
 
     steps:
       - name: Checkout
         id: checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
       - name: Buildx
-        uses: ./.github/actions/build
+        uses: $/.github/actions/build
         with:
           is_dockerhub_pushed: "1"
           docker_password: ${{ secrets.DOCKER_PASSWORD }}
@@ -65,22 +79,29 @@ jobs:
           revision: ${{ steps.checkout.outputs.commit }}
 
   teslamate_merge:
+    name: Merge Docker Hub images
     runs-on: ubuntu-24.04
     needs:
       - check_paths
       - teslamate_build
     if: needs.check_paths.outputs.githubfolder == 'false' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    # Granted only to the jobs that push images and attest them, instead of
+    # to every job through the workflow level.
+    permissions:
+      contents: read
+      id-token: write # required to sign the attestation
+      attestations: write # required to store the provenance attestation
+      artifact-metadata: write # required to create the artifact storage record
+    # No checkout: `$/` loads the merge action from the running commit, and
+    # the action reads only the downloaded digests and the workflow context.
     steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
       - name: Login to Docker Hub
         uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
         with:
           username: teslamate
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - uses: ./.github/actions/merge
+      - uses: $/.github/actions/merge
         with:
           image: ${{ env.REGISTRY_IMAGE }}
           tags: |
@@ -89,13 +110,23 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=edge
   grafana:
+    name: Build Grafana image
     needs: check_paths
     if: needs.check_paths.outputs.githubfolder == 'false' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    # Granted only to the jobs that push images and attest them, instead of
+    # to every job through the workflow level.
+    permissions:
+      contents: read
+      id-token: write # required to sign the attestation
+      attestations: write # required to store the provenance attestation
+      artifact-metadata: write # required to create the artifact storage record
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Login to Docker Hub
         uses: docker/login-action@8aa5831fb8d48d8f76594c7ddde61ae58019f550 # v4.8.0
@@ -103,7 +134,7 @@ jobs:
           username: teslamate
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - uses: ./.github/actions/grafana
+      - uses: $/.github/actions/grafana
         with:
           tags: |
             type=edge

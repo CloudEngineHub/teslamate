@@ -10,20 +10,30 @@ on:
       - "!.github/workflows/**" # Important: Exclude PRs related to .github/workflows from auto-run
       - "!.github/actions/**" # Important: Exclude PRs related to .github/actions from auto-run
 
+# Only the newest cleanup run per pull request is kept. The group uses the
+# pull request number, not github.ref: for a merged pull request github.ref
+# is the base branch, so cleanups of different pull requests would cancel
+# each other.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
-  packages: read
-  actions: write
 
 jobs:
   check_paths:
-    uses: ./.github/workflows/check_paths.yml
+    uses: $/.github/workflows/check_paths.yml
 
   cleanup:
     name: Delete caches when PR is closed
     needs: check_paths
     if: needs.check_paths.outputs.githubfolder == 'false'
     runs-on: ubuntu-24.04
+    # Only this job deletes caches, so only it gets `actions: write`.
+    permissions:
+      contents: read
+      actions: write # required to delete caches
 
     steps:
       - name: Cleanup

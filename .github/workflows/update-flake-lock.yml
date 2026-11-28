@@ -6,19 +6,35 @@ on:
     # runs weekly on Saturday at 00:00 UTC time
     - cron: "0 0 * * 6"
 
-permissions:
-  contents: write
-  pull-requests: write
+# A newer run on the same ref pushes the same update branch, so it supersedes
+# the older one, which is cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
 
 jobs:
   lockfile:
+    name: Update flake.lock
     runs-on: ubuntu-24.04
+    permissions:
+      contents: write # required to push the update branch
+      pull-requests: write # required to open the pull request
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # The push needs no credential from the checkout: update-flake-lock
+          # only commits locally and leaves the push and the pull request to
+          # peter-evans/create-pull-request, passing it its `token` input
+          # (default github.token). create-pull-request configures its own
+          # git authentication from that token (GitConfigHelper.configureToken,
+          # called in src/create-pull-request.ts before any fetch or push).
+          persist-credentials: false
 
       - name: Set up Nix and the store cache
-        uses: ./.github/actions/setup-nix
+        uses: $/.github/actions/setup-nix
         with:
           purpose: flake-lock
 
@@ -32,4 +48,6 @@ jobs:
             automated
 
       - name: Print PR number
-        run: echo Pull request number is ${{ steps.update.outputs.pull-request-number }}.
+        env:
+          PR_NUMBER: ${{ steps.update.outputs.pull-request-number }}
+        run: echo "Pull request number is ${PR_NUMBER}."
